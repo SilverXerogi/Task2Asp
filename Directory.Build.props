@@ -33,6 +33,6 @@
 		<Using Include="System.Text" />
 		<Using Include="System.Text.Json" />
 		<Using Include="System.Text.Json.Serialization" />
-		<Using Include="Goods.Tools.Types" />
+		<Using Include="Students.Tools.Types" />
 	</ItemGroup>
 </Project>

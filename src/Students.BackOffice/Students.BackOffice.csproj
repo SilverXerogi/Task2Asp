@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+	<ItemGroup>
+		<Compile Remove="client-app\**" />
+		<Content Remove="client-app\**" />
+		<EmbeddedResource Remove="client-app\**" />
+		<None Remove="client-app\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Students.Domain\Students.Domain.csproj" />
+		<ProjectReference Include="..\Students.Services\Students.Services.csproj" />
+		<ProjectReference Include="..\Students.Tools\Students.Tools.csproj" />
+	</ItemGroup>
+</Project>
