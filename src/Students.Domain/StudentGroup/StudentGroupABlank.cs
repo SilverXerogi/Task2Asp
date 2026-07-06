@@ -8,7 +8,8 @@ namespace Students.Domain.StudentGroup
         public Guid? Id { get; set; }
         public String? Name { get; set; }
         public String? Abbr { get; set; }
-        public DateOnly? Data { get; set; }
+        public Int32? StartYear { get; set; }
+        public Int32? EndYear { get; set; }
         public StudyFormat? StudyFormat { get; set; }
     }
 }

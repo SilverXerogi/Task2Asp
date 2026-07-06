@@ -1,34 +1,37 @@
 ﻿using Students.Domain.Enums;
 
-namespace Goods.Services.Products.Repositories.Models;
+namespace Students.Services.StudentGroups.Repositories.Models;
 
-public class ProductDb
+public class StudentGroupDb
 {
     public Guid Id { get; set; }
-    public ProductCategory Category { get; set; }
     public String Name { get; set; }
-    public String? Description { get; set; }
-    public Double Price { get; set; }
+    public String Abbreviation { get; set; }
+    public Int32 StartYear { get; set; }
+    public Int32 EndYear { get; set; }
+    public StudyFormat StudyFormat { get; set; }
     public DateTime CreatedDateTimeUtc { get; set; }
     public DateTime? ModifiedDateTimeUtc { get; set; }
     public Boolean IsRemoved { get; set; }
 
-    public ProductDb(
+    public StudentGroupDb(
         Guid id,
-        ProductCategory category,
         String name,
-        String? description,
-        Double price,
+        String abbreviation,
+        Int32 startYear,
+        Int32 endYear,
+        StudyFormat studyFormat,
         DateTime createdDateTimeUtc,
         DateTime? modifiedDateTimeUtc,
         Boolean isRemoved
     )
     {
         Id = id;
-        Category = category;
         Name = name;
-        Description = description;
-        Price = price;
+        Abbreviation = abbreviation;
+        StartYear = startYear;
+        EndYear = endYear;
+        StudyFormat = studyFormat;
         CreatedDateTimeUtc = createdDateTimeUtc;
         ModifiedDateTimeUtc = modifiedDateTimeUtc;
         IsRemoved = isRemoved;

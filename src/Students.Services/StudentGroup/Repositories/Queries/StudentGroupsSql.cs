@@ -1,65 +1,60 @@
-﻿namespace Goods.Services.Products.Repositories.Queries;
+﻿namespace Students.Services.StudentGroups.Repositories.Queries;
 
-internal static class StudentSql
+internal static class StudentGroupsSql
 {
-    internal static String Products_Save =>
+    internal static String Save =>
         """
-            INSERT INTO products (
+            INSERT INTO student_groups (
                 id,
-                category,
                 name,
-        	    description,
-                price,
+                abbreviation,
+                startyear,
+                endyear,
+                studyformat,
                 createddatetimeutc,
                 isremoved
             )
             VALUES (
                 @id,
-                @category,
                 @name,
-                @description,
-                @price,
+                @abbreviation,
+                @startYear,
+                @endYear,
+                @studyFormat,
                 @createdDateTimeUtc,
                 @isRemoved
             )
         	ON CONFLICT (id) DO UPDATE SET
-        	    category = @category,
         	    name = @name,
-        	    description = @description,
-        	    price = @price,
+        	    abbreviation = @abbreviation,
+        	    startyear = @startYear,
+        	    endyear = @endYear,
+        	    studyformat = @studyFormat,
         	    modifieddatetimeutc = @modifiedDateTimeUtc
         """;
 
-    internal static String Products_GetById =>
+    internal static String GetById =>
         """
             SELECT * 
-            FROM products 
+            FROM student_groups 
             WHERE id = @id;
         """;
 
-    internal static String Products_GetByName =>
-        """
-            SELECT * 
-            FROM products 
-            WHERE name = @name
-            AND NOT isremoved;
-        """;
-
-    internal static String Products_GetPage =>
+    internal static String GetPage =>
         """
             SELECT 
                 COUNT(*) OVER() as count, 
                 *
-            FROM products 
+            FROM student_groups 
             WHERE NOT isremoved 
             ORDER BY createddatetimeutc DESC 
             OFFSET @offset 
             LIMIT @limit
         """;
 
-    internal static String Products_Remove =>
+    internal static String Remove =>
         """
-        	UPDATE products
+        	UPDATE student_groups
         	SET 
                 isremoved = TRUE,
         		modifieddatetimeutc = @modifiedDateTimeUtc
