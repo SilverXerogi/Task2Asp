@@ -1,5 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
+	  <Compile Include="Migrations\000000\0000000000002  CREATE TABLE students.sql" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="FluentMigrator" Version="7.1.0" />
 		<PackageReference Include="FluentMigrator.Runner" Version="7.1.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.7" />

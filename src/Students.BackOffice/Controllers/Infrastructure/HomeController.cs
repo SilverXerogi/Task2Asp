@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Goods.BackOffice.Controllers.Infrastructure;
+namespace Students.BackOffice.Controllers.Infrastructure;
 
 public class HomeController : BaseController
 {

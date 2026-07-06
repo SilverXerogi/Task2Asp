@@ -1,5 +1,4 @@
 ﻿
-using Goods.Services.Products.Repositories.Queries;
 using Students.Domain.Students;
 using Students.Services.Students.Repositories.Converters;
 using Students.Services.Students.Repositories.Models;

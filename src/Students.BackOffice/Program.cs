@@ -1,5 +1,5 @@
-using Goods.Services;
-using Goods.Tools.Utils.Json;
+using Students.Services;
+using Students.Tools.Utils.Json;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
 
