@@ -2,15 +2,16 @@
 using Goods.Domain.Services;
 using Goods.Services.Products.Repositories;
 using Goods.Tools.Types.Results;
+using Students.Domain.Enums;
 
 namespace Goods.Services.Products;
 
 public class ProductsService(IProductsRepository productsRepository) : IProductsService
 {
-    public async Task<Result> SaveProduct(ProductBlank productBlank)
+    public async Task<Result> SaveProduct(StudentBlank productBlank)
     {
-        DataResult<Product> validationResult = await ValidateProductBlank(productBlank);
-        if (validationResult.IsFail(out Product product)) return validationResult.ToResult();
+        DataResult<Students> validationResult = await ValidateProductBlank(productBlank);
+        if (validationResult.IsFail(out Students product)) return validationResult.ToResult();
 
         await productsRepository.SaveProduct(product);
 
@@ -19,21 +20,21 @@ public class ProductsService(IProductsRepository productsRepository) : IProducts
 
     #region Validation
 
-    private async Task<DataResult<Product>> ValidateProductBlank(ProductBlank productBlank)
+    private async Task<DataResult<Students>> ValidateProductBlank(StudentBlank productBlank)
     {
         DataResult<Guid?> existProductValidationResult = await ValidateExistProduct(productBlank);
-        if (existProductValidationResult.IsFail(out Guid? id)) return DataResult<Product>.Fail(existProductValidationResult);
+        if (existProductValidationResult.IsFail(out Guid? id)) return DataResult<Students>.Fail(existProductValidationResult);
 
         DataResult<ProductCategory> categoryValidationResult = ValidateProductCategory(productBlank);
-        if (categoryValidationResult.IsFail(out ProductCategory category)) return DataResult<Product>.Fail(categoryValidationResult);
+        if (categoryValidationResult.IsFail(out ProductCategory category)) return DataResult<Students>.Fail(categoryValidationResult);
 
         DataResult<String> nameValidationResult = await ValidateProductName(productBlank);
-        if (nameValidationResult.IsFail(out String name)) return DataResult<Product>.Fail(nameValidationResult);
+        if (nameValidationResult.IsFail(out String name)) return DataResult<Students>.Fail(nameValidationResult);
 
         DataResult<Decimal> priceValidationResult = ValidateProductPrice(productBlank);
-        if (priceValidationResult.IsFail(out Decimal price)) return DataResult<Product>.Fail(priceValidationResult);
+        if (priceValidationResult.IsFail(out Decimal price)) return DataResult<Students>.Fail(priceValidationResult);
 
-        Product product = new(
+        Students product = new(
             id ?? Guid.NewGuid(),
             category,
             name,
@@ -42,21 +43,21 @@ public class ProductsService(IProductsRepository productsRepository) : IProducts
             isRemoved: false
         );
 
-        return DataResult<Product>.Success(product);
+        return DataResult<Students>.Success(product);
     }
 
-    private async Task<DataResult<Guid?>> ValidateExistProduct(ProductBlank productBlank)
+    private async Task<DataResult<Guid?>> ValidateExistProduct(StudentBlank productBlank)
     {
         if (productBlank.Id is not { } id)
             return DataResult<Guid?>.Success(null);
 
-        Product existProduct = await GetProduct(id);
+        Students existProduct = await GetProduct(id);
         if (existProduct.IsRemoved) return DataResult<Guid?>.Fail("Продукт удален");
 
         return DataResult<Guid?>.Success(id);
     }
 
-    private DataResult<ProductCategory> ValidateProductCategory(ProductBlank productBlank)
+    private DataResult<ProductCategory> ValidateProductCategory(StudentBlank productBlank)
     {
         if (productBlank.Category is not { } category)
             return DataResult<ProductCategory>.Fail("Выберите категорию продукта");
@@ -67,7 +68,7 @@ public class ProductsService(IProductsRepository productsRepository) : IProducts
         return DataResult<ProductCategory>.Success(category);
     }
 
-    private async Task<DataResult<String>> ValidateProductName(ProductBlank productBlank)
+    private async Task<DataResult<String>> ValidateProductName(StudentBlank productBlank)
     {
         if (String.IsNullOrWhiteSpace(productBlank.Name))
             return DataResult<String>.Fail("Не указано название продукта");
@@ -76,14 +77,14 @@ public class ProductsService(IProductsRepository productsRepository) : IProducts
         if (productBlank.Name.Length >= maxProductNameLength)
             return DataResult<String>.Fail($"Название продукта слишком длинное. Максимально допустимо {maxProductNameLength} символов");
 
-        Product? productWithSameName = await GetProduct(productBlank.Name);
+        Students? productWithSameName = await GetProduct(productBlank.Name);
         if (productWithSameName is not null && productWithSameName.Id != productBlank.Id)
             return DataResult<String>.Fail("Продукт с таким названием уже существует");
 
         return DataResult<String>.Success(productBlank.Name);
     }
 
-    private DataResult<Decimal> ValidateProductPrice(ProductBlank productBlank)
+    private DataResult<Decimal> ValidateProductPrice(StudentBlank productBlank)
     {
         if (productBlank.Price is not { } price)
             return DataResult<Decimal>.Fail("Не указана стоимость продукта");
@@ -96,27 +97,27 @@ public class ProductsService(IProductsRepository productsRepository) : IProducts
     
     #endregion Validation
 
-    public async Task<Product> GetProduct(Guid productId)
+    public async Task<Students> GetProduct(Guid productId)
     {
-        Product? product = await productsRepository.GetProduct(productId);
+        Students? product = await productsRepository.GetProduct(productId);
         if (product is null) throw new Exception($"Продукт {productId} не найден");
 
         return product;
     }
 
-    private Task<Product?> GetProduct(String name)
+    private Task<Students?> GetProduct(String name)
     {
         return productsRepository.GetProduct(name);
     }
 
-    public Task<Page<Product>> GetProducts(Int32 page, Int32 countInPage)
+    public Task<Page<Students>> GetProducts(Int32 page, Int32 countInPage)
     {
         return productsRepository.GetProducts(page, countInPage);
     }
 
     public async Task<Result> RemoveProduct(Guid id)
     {
-        Product product = await GetProduct(id);
+        Students product = await GetProduct(id);
         if (product.IsRemoved) return Result.Fail("Продукт уже удален");
 
         await productsRepository.RemoveProduct(id);

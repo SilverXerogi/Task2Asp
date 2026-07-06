@@ -1,12 +1,12 @@
-﻿using Goods.Domain.Products;
-using Goods.Services.Products.Repositories.Models;
+﻿using Goods.Services.Products.Repositories.Models;
 using Npgsql;
+using Students.Domain.Enums;
 
 namespace Goods.Services.Products.Repositories.Converters;
 
 internal static class ProductsConverter
 {
-    internal static Product ToProduct(this ProductDb productDb)
+    internal static Students ToProduct(this ProductDb productDb)
     {
         return new Product(
             productDb.Id,
@@ -33,7 +33,7 @@ internal static class ProductsConverter
         );
     }
 
-    public static ProductDb ToProductDb(this Product product)
+    public static ProductDb ToProductDb(this Students product)
     {
         return new ProductDb(
             product.Id, 

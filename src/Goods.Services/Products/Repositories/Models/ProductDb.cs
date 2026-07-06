@@ -1,4 +1,4 @@
-﻿using Goods.Domain.Products;
+﻿using Students.Domain.Enums;
 
 namespace Goods.Services.Products.Repositories.Models;
 

@@ -12,19 +12,19 @@ public class ProductsController(IProductsService productsService) : BaseControll
     public IActionResult Index() => ReactApp();
 
 	[HttpPost("products/save")]
-	public Task<Result> SaveProducts([FromBody] ProductBlank productBlank)
+	public Task<Result> SaveProducts([FromBody] StudentBlank productBlank)
 	{
 		return productsService.SaveProduct(productBlank);
 	}
 
 	[HttpGet("products/get-page")]
-	public Task<Page<Product>> GetProductsPage([FromQuery] Int32 page, [FromQuery] Int32 count)
+	public Task<Page<Students>> GetProductsPage([FromQuery] Int32 page, [FromQuery] Int32 count)
 	{
 		return productsService.GetProducts(page, count);
 	}
 
 	[HttpGet("products/get-by-id")]
-	public Task<Product> GetProduct([FromQuery] Guid id)
+	public Task<Students> GetProduct([FromQuery] Guid id)
 	{
 		return productsService.GetProduct(id);
 	}

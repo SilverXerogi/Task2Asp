@@ -9,7 +9,7 @@ namespace Goods.Services.Products.Repositories;
 
 public class ProductsRepository : IProductsRepository
 {
-	public Task SaveProduct(Product product)
+	public Task SaveProduct(Students product)
     {
         ProductDb productDb = product.ToProductDb();
 
@@ -29,7 +29,7 @@ public class ProductsRepository : IProductsRepository
         );
     }
 
-    public async Task<Product?> GetProduct(Guid id)
+    public async Task<Students?> GetProduct(Guid id)
     {
         ProductDb? productDb = await DatabaseUtils.GetAsync<ProductDb?>(
             Sql.Products_GetById,
@@ -43,7 +43,7 @@ public class ProductsRepository : IProductsRepository
         return productDb?.ToProduct();
     }
 
-    public async Task<Product?> GetProduct(String name)
+    public async Task<Students?> GetProduct(String name)
     {
         ProductDb? productDb = await DatabaseUtils.GetAsync<ProductDb?>(
             Sql.Products_GetByName,
@@ -57,7 +57,7 @@ public class ProductsRepository : IProductsRepository
         return productDb?.ToProduct();
     }
 
-    public async Task<Page<Product>> GetProducts(Int32 page, Int32 count)
+    public async Task<Page<Students>> GetProducts(Int32 page, Int32 count)
     {
         (Int32 offset, Int32 limit) = NormalizeRange(page, count);
 
