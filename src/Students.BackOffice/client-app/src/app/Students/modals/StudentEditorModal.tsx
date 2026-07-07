@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Product } from '../../../domain/products/product';
-import { ProductBlank } from '../../../domain/products/productBlank';
-import { ProductCategory } from '../../../domain/products/productCategory';
-import { ProductsProvider } from '../../../domain/products/productsProvider';
+import { Student } from '../../../domain/Students/Student';
+import { StudentBlank } from '../../../domain/Students/StudentBlank';
+import { Gender } from '../../../domain/Students/Gender';
+import { StudentsProvider } from '../../../domain/Students/StudentsProvider';
 import { Button } from '../../../shared/components/buttons/button';
 import { Input } from '../../../shared/components/inputs/input';
 import { Modal } from '../../../shared/components/modals/modal';
@@ -10,41 +10,41 @@ import { Notification } from '../../../shared/components/notification';
 import { Enum } from '../../../tools/types/enum';
 
 interface Props {
-	productId: string | null;
+	studentId: string | null;
 	onClose: (isEdited: boolean) => void;
 	isOpen: boolean;
 }
 
-export function ProductEditorModal(props: Props) {
-	const [productBlank, setProductBlank] = useState<ProductBlank>(ProductBlank.getEmpty());
+export function StudentEditorModal(props: Props) {
+	const [studentBlank, setStudentBlank] = useState<StudentBlank>(StudentBlank.getEmpty());
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
 	useEffect(() => {
 		if (!props.isOpen) return;
 
-		async function loadProductBlank() {
-			let productBlank: ProductBlank | null = null;
+		async function loadStudentBlank() {
+			let studentBlank: StudentBlank | null = null;
 
-			if (props.productId != null) {
-				const product: Product | null = await ProductsProvider.getProductById(props.productId);
-				if (product == null) throw 'Product is null';
+			if (props.studentId != null) {
+				const student: Student | null = await StudentsProvider.getStudentById(props.studentId);
+				if (student == null) throw 'Student is null';
 
-				productBlank = ProductBlank.getFromProduct(product);
+				studentBlank = StudentBlank.getFromStudent(student);
 			}
 
-			setProductBlank(productBlank ?? ProductBlank.getEmpty());
+			setStudentBlank(studentBlank ?? StudentBlank.getEmpty());
 		}
 
-		loadProductBlank();
+		loadStudentBlank();
 
 		return () => {
-			setProductBlank(ProductBlank.getEmpty());
+			setStudentBlank(StudentBlank.getEmpty());
 			setErrorMessage(null);
 		};
-	}, [props.isOpen, props.productId]);
+	}, [props.isOpen, props.studentId]);
 
-	async function saveProduct() {
-		const result = await ProductsProvider.saveProduct(productBlank);
+	async function saveStudent() {
+		const result = await StudentsProvider.saveStudent(studentBlank);
 		if (!result.isSuccess) {
 			setErrorMessage(result.errorsAsString);
 			return;
@@ -68,40 +68,41 @@ export function ProductEditorModal(props: Props) {
 					<Input
 						variant='select'
 						title='Выберите категорию'
-						options={Enum.getNumberValues<ProductCategory>(ProductCategory)}
-						getOptionLabel={(option) => ProductCategory.getDisplayName(option)}
+						options={Enum.getNumberValues<Gender>(Gender)}
+						getOptionLabel={(option) => Gender.getDisplayName(option)}
 						isOptionEqualToValue={(a, b) => a === b}
-						value={productBlank.category}
-						onChange={(category) => setProductBlank((productBlank) => ({ ...productBlank, category }))}
+						value={studentBlank.gender}
+						onChange={(gender) => setStudentBlank((studentBlank) => ({ ...studentBlank, gender }))}
 						required
 					/>
 					<Input
 						variant='text'
 						title='Введите название'
-						value={productBlank.name}
-						onChange={(name) => setProductBlank((productBlank) => ({ ...productBlank, name }))}
+						value={studentBlank.fullName}
+						onChange={(fullName) => setStudentBlank((studentBlank) => ({ ...studentBlank, fullName }))}
 						required
 					/>
+					{/* 
 					<Input
 						variant='text-area'
 						title='Введите описание'
 						minRows={2}
-						value={productBlank.description}
+						value={studentBlank.}
 						onChange={(description) =>
-							setProductBlank((productBlank) => ({ ...productBlank, description }))
+							setStudentBlank((studentBlank) => ({ ...studentBlank, description }))
 						}
-					/>
+					/> */}
 					<Input
 						variant='number'
 						title='Введите цену'
-						value={productBlank.price}
-						onChange={(price) => setProductBlank((productBlank) => ({ ...productBlank, price }))}
+						value={studentBlank.age}
+						onChange={(age) => setStudentBlank((studentBlank) => ({ ...studentBlank, age }))}
 						isAvailableFractionValue
 						required
 					/>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant='save' onClick={() => saveProduct()} />
+					<Button variant='save' onClick={() => saveStudent()} />
 				</Modal.Footer>
 			</Modal>
 

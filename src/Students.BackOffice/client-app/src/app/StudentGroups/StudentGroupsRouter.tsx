@@ -2,14 +2,14 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { StudentGroupsPage } from './StudentGroupsPage';
 
-export function ProductsRouter() {
+export function StudentGroupsRouter() {
 	return (
 		<>
-			<Route path={ProductLink.index} element={<StudentGroupsPage />} />
+			<Route path={StudentGroupLink.index} element={<StudentGroupsPage />} />
 		</>
 	);
 }
 
-export class ProductLink {
-	public static index = '/products';
+export class StudentGroupLink {
+	public static index = '/studentGroups';
 }

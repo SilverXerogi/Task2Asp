@@ -77,7 +77,7 @@ export function StudentGroupsPage() {
 
 	async function closeRemoveStudentGroupConfirmModal(isConfirmed: boolean) {
 		if (isConfirmed) {
-			if (removeStudentGroupConfirmModalState.studentGroupId == null) throw 'Cannot remove product with studentGroupId = null';
+			if (removeStudentGroupConfirmModalState.studentGroupId == null) throw 'Cannot remove studentGroup with studentGroupId = null';
 
 			const result = await StudentGroupsProvider.removeStudentGroup(removeStudentGroupConfirmModalState.studentGroupId);
 			if (!result.isSuccess) {
@@ -129,7 +129,7 @@ export function StudentGroupsPage() {
 							}
 							{
 								studentGroups.map(studentGroup => (
-									<TableRow key={`product__${studentGroup.id}`}>
+									<TableRow key={`studentGroup__${studentGroup.id}`}>
 										<TableCell width='15%'>
 											{StudyFormat.getDisplayName(studentGroup.studyFormat)}
 										</TableCell>

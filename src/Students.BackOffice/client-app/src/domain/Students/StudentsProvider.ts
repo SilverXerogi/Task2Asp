@@ -41,7 +41,7 @@ export class StudentsProvider {
 	}
 
 	public static async removeStudent(id: string): Promise<Result> {
-		const response = await fetch(`/students/remove?productId=${id}`, {
+		const response = await fetch(`/students/remove?studentId=${id}`, {
 			method: 'GET',
 			headers: this.headers
 		});
