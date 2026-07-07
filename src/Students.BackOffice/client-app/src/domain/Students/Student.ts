@@ -20,7 +20,7 @@ export class Student {
 	}
 }
 
-export function mapToPStudentsPage(data: any): Page<Student> {
+export function mapToStudentsPage(data: any): Page<Student> {
 	return Page.convert(data, mapToStudent);
 }
 
