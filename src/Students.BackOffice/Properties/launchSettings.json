@@ -1,10 +1,14 @@
-﻿{
+{
   "profiles": {
     "BackOffice -> Development": {
       "commandName": "IISExpress",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
     }
   },
   "iisSettings": {
