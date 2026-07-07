@@ -105,7 +105,7 @@ export function StudentsPage() {
 					paddingX: '12px',
 					paddingY: '6px'
 				}}>
-				<Typography variant='h6'>Продукты</Typography>
+				<Typography variant='h6'>Студенты</Typography>
 				<Button variant='add' title='Создать' onClick={() => openStudentEditorModal()} />
 			</Paper>
 			<Paper elevation={3} sx={{ height: 'calc(100% - 52px)' }}>
@@ -113,10 +113,12 @@ export function StudentsPage() {
 					<Table stickyHeader>
 						<TableHead>
 							<TableRow>
-								<TableCell>Категория</TableCell>
-								<TableCell>Название</TableCell>
-								<TableCell>Описание</TableCell>
-								<TableCell>Цена</TableCell>
+								<TableCell>ФИО</TableCell>
+								<TableCell>Пол</TableCell>
+								<TableCell>Возраст</TableCell>
+								<TableCell>Средняя оценка</TableCell>
+								<TableCell>Стипендия</TableCell>
+								<TableCell>Особые отметки</TableCell>
 								<TableCell>Управление</TableCell>
 							</TableRow>
 						</TableHead>
@@ -130,12 +132,18 @@ export function StudentsPage() {
 							{
 								students.map(student => (
 									<TableRow key={`student__${student.id}`}>
-										<TableCell width='15%'>
+										<TableCell width='25%'>{student.fullName}</TableCell>
+										<TableCell width='10%'>
 											{Gender.getDisplayName(student.gender)}
 										</TableCell>
-										<TableCell width='20%'>{student.fullName}</TableCell>
-										<TableCell width='40%'>{student.age ?? '—'}</TableCell>
-										<TableCell width='15%'>{student.gender}</TableCell>
+										<TableCell width='8%'>{student.age}</TableCell>
+										<TableCell width='10%'>{student.averageGrade.toFixed(2)}</TableCell>
+										<TableCell width='10%'>
+											{student.hasScholarShip ? 'Да' : 'Нет'}
+										</TableCell>
+										<TableCell width='22%'>
+											{student.specialMarksText || '—'}
+										</TableCell>
 										<TableCell>
 											<Button
 												type='icon'

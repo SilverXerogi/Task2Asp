@@ -105,7 +105,7 @@ export function StudentGroupsPage() {
 					paddingX: '12px',
 					paddingY: '6px'
 				}}>
-				<Typography variant='h6'>Продукты</Typography>
+				<Typography variant='h6'>Студенческие группы</Typography>
 				<Button variant='add' title='Создать' onClick={() => openStudentGroupEditorModal()} />
 			</Paper>
 			<Paper elevation={3} sx={{ height: 'calc(100% - 52px)' }}>
@@ -113,10 +113,10 @@ export function StudentGroupsPage() {
 					<Table stickyHeader>
 						<TableHead>
 							<TableRow>
-								<TableCell>Категория</TableCell>
 								<TableCell>Название</TableCell>
-								<TableCell>Описание</TableCell>
-								<TableCell>Цена</TableCell>
+								<TableCell>Аббревиатура</TableCell>
+								<TableCell>Период обучения</TableCell>
+								<TableCell>Формат обучения</TableCell>
 								<TableCell>Управление</TableCell>
 							</TableRow>
 						</TableHead>
@@ -129,14 +129,13 @@ export function StudentGroupsPage() {
 							}
 							{
 								studentGroups.map(studentGroup => (
-									<TableRow key={`studentGroup__${studentGroup.id}`}>
-										<TableCell width='15%'>
+									<TableRow key={`group__${studentGroup.id}`}>
+										<TableCell width='30%'>{studentGroup.name}</TableCell>
+										<TableCell width='15%'>{studentGroup.abbr}</TableCell>
+										<TableCell width='20%'>{studentGroup.period}</TableCell>
+										<TableCell width='20%'>
 											{StudyFormat.getDisplayName(studentGroup.studyFormat)}
 										</TableCell>
-										<TableCell width='20%'>{studentGroup.name}</TableCell>
-										<TableCell width='40%'>{studentGroup.abbr ?? '—'}</TableCell>
-										<TableCell width='15%'>{studentGroup.startYear}</TableCell>
-										<TableCell width='15%'>{studentGroup.endYear}</TableCell>
 										<TableCell>
 											<Button
 												type='icon'
