@@ -10,7 +10,7 @@ export class StudentGroupsProvider {
 	];
 
 	public static async saveStudentGroup(StudentGroupBlank: StudentGroupBlank): Promise<Result> {
-		const response = await fetch('/student-groups/save', {
+		const response = await fetch('/studentGroups/save', {
 			method: 'POST',
 			headers: this.headers,
 			body: JSON.stringify(StudentGroupBlank)
@@ -21,7 +21,7 @@ export class StudentGroupsProvider {
 	}
 
 	public static async getStudentGroupsPage(page: number, count: number): Promise<Page<StudentGroup>> {
-		const response = await fetch(`/student-groups/get-page?page=${page}&count=${count}`, {
+		const response = await fetch(`/studentGroups/get-page?page=${page}&count=${count}`, {
 			method: 'GET',
 			headers: this.headers
 		});
@@ -31,7 +31,7 @@ export class StudentGroupsProvider {
 	}
 
 	public static async getStudentGroupById(id: string): Promise<StudentGroup | null> {
-		const response = await fetch(`/student-groups/get-by-id?studentGroupId=${id}`, {
+		const response = await fetch(`/studentGroups/get-by-id?studentGroupId=${id}`, {
 			method: 'GET',
 			headers: this.headers
 		});
@@ -41,7 +41,7 @@ export class StudentGroupsProvider {
 	}
 
 	public static async removeStudentGroup(id: string): Promise<Result> {
-		const response = await fetch(`/student-groups/remove?studentGroupId=${id}`, {
+		const response = await fetch(`/studentGroups/remove?studentGroupId=${id}`, {
 			method: 'GET',
 			headers: this.headers
 		});

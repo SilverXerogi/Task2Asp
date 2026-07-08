@@ -8498,7 +8498,7 @@ function StudentGroupEditorModal(props) {
     }
     return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
         react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_6__.Modal, { onClose: function () { return props.onClose(false); }, isOpen: props.isOpen },
-            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_6__.Modal.Header, { onClose: function () { return props.onClose(false); } }, "\u0420\u0435\u0434\u0430\u043A\u0442\u043E\u0440 \u043F\u0440\u043E\u0434\u0443\u043A\u0442\u0430"),
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_6__.Modal.Header, { onClose: function () { return props.onClose(false); } }, "\u0420\u0435\u0434\u0430\u043A\u0442\u043E\u0440 \u0421\u0442\u0443\u0434\u0435\u043D\u0442\u0447\u0435\u0441\u043A\u043E\u0439 \u0433\u0440\u0443\u043F\u043F\u044B"),
             react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_6__.Modal.Body, { sx: {
                     maxWidth: '800px',
                     minWidth: '600px',
@@ -8506,12 +8506,13 @@ function StudentGroupEditorModal(props) {
                     flexDirection: 'column',
                     gap: '12px'
                 } },
-                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'select', title: '\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u044E', options: _tools_types_enum__WEBPACK_IMPORTED_MODULE_8__.Enum.getNumberValues(_domain_StudentGroups_StudyFormat__WEBPACK_IMPORTED_MODULE_2__.StudyFormat), getOptionLabel: function (option) { return _domain_StudentGroups_StudyFormat__WEBPACK_IMPORTED_MODULE_2__.StudyFormat.getDisplayName(option); }, isOptionEqualToValue: function (a, b) { return a === b; }, value: studentGroupBlank.studyFormat, onChange: function (studyFormat) { return setStudentGroupBlank(function (studentGroupBlank) { return (__assign(__assign({}, studentGroupBlank), { studyFormat: studyFormat })); }); }, required: true }),
-                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'text', title: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435', value: studentGroupBlank.name, onChange: function (name) { return setStudentGroupBlank(function (studentGroupBlank) { return (__assign(__assign({}, studentGroupBlank), { name: name })); }); }, required: true }),
-                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'text-area', title: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0431\u0431\u0440\u0435\u0432\u0438\u0430\u0442\u0443\u0440\u0443', minRows: 2, value: studentGroupBlank.abbr, onChange: function (abbr) {
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'text', title: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0433\u0440\u0443\u043F\u043F\u044B', value: studentGroupBlank.name, onChange: function (name) { return setStudentGroupBlank(function (studentGroupBlank) { return (__assign(__assign({}, studentGroupBlank), { name: name })); }); }, required: true }),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'text', title: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0431\u0431\u0440\u0435\u0432\u0438\u0430\u0442\u0443\u0440\u0443', value: studentGroupBlank.abbr, onChange: function (abbr) {
                         return setStudentGroupBlank(function (studentGroupBlank) { return (__assign(__assign({}, studentGroupBlank), { abbr: abbr })); });
                     } }),
-                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'number', title: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0444\u043E\u0440\u043C\u0430\u0442', value: studentGroupBlank.studyFormat, onChange: function (studyFormat) { return setStudentGroupBlank(function (studentGroupBlank) { return (__assign(__assign({}, studentGroupBlank), { studyFormat: studyFormat })); }); }, isAvailableFractionValue: true, required: true })),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'number', title: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0433\u043E\u0434 \u043D\u0430\u0447\u0430\u043B\u0430 \u043E\u0431\u0443\u0447\u0435\u043D\u0438\u044F', value: studentGroupBlank.startYear, onChange: function (startYear) { return setStudentGroupBlank(function (studentGroupBlank) { return (__assign(__assign({}, studentGroupBlank), { startYear: startYear })); }); }, isAvailableFractionValue: true, required: true }),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'number', title: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0433\u043E\u0434 \u043A\u043E\u043D\u0446\u0430 \u043E\u0431\u0443\u0447\u0435\u043D\u0438\u044F', value: studentGroupBlank.endYear, onChange: function (endYear) { return setStudentGroupBlank(function (studentGroupBlank) { return (__assign(__assign({}, studentGroupBlank), { endYear: endYear })); }); }, isAvailableFractionValue: true, required: true }),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'select', title: '\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0444\u043E\u0440\u043C\u0430\u0442 \u043E\u0431\u0443\u0447\u0435\u043D\u0438\u044F', options: _tools_types_enum__WEBPACK_IMPORTED_MODULE_8__.Enum.getNumberValues(_domain_StudentGroups_StudyFormat__WEBPACK_IMPORTED_MODULE_2__.StudyFormat), getOptionLabel: function (option) { return _domain_StudentGroups_StudyFormat__WEBPACK_IMPORTED_MODULE_2__.StudyFormat.getDisplayName(option); }, isOptionEqualToValue: function (a, b) { return a === b; }, value: studentGroupBlank.studyFormat, onChange: function (studyFormat) { return setStudentGroupBlank(function (studentGroupBlank) { return (__assign(__assign({}, studentGroupBlank), { studyFormat: studyFormat })); }); }, required: true })),
             react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_6__.Modal.Footer, null,
                 react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_4__.Button, { variant: 'save', onClick: function () { return saveStudentGroup(); } }))),
         !String.isNullOrWhitespace(errorMessage) &&
@@ -8831,12 +8832,14 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 function StudentEditorModal(props) {
-    var _a = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_domain_Students_StudentBlank__WEBPACK_IMPORTED_MODULE_1__.StudentBlank.getEmpty()), studentBlank = _a[0], setStudentBlank = _a[1];
-    var _b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null), errorMessage = _b[0], setErrorMessage = _b[1];
+    var _a;
+    var _b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_domain_Students_StudentBlank__WEBPACK_IMPORTED_MODULE_1__.StudentBlank.getEmpty()), studentBlank = _b[0], setStudentBlank = _b[1];
+    var _c = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null), errorMessage = _c[0], setErrorMessage = _c[1];
+    var _d = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]), studentGroups = _d[0], setStudentGroups = _d[1];
     (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
         if (!props.isOpen)
             return;
-        function loadStudentBlank() {
+        function loadData() {
             return __awaiter(this, void 0, void 0, function () {
                 var studentBlank, student;
                 return __generator(this, function (_a) {
@@ -8858,9 +8861,10 @@ function StudentEditorModal(props) {
                 });
             });
         }
-        loadStudentBlank();
+        loadData();
         return function () {
             setStudentBlank(_domain_Students_StudentBlank__WEBPACK_IMPORTED_MODULE_1__.StudentBlank.getEmpty());
+            setStudentGroups([]);
             setErrorMessage(null);
         };
     }, [props.isOpen, props.studentId]);
@@ -8882,9 +8886,27 @@ function StudentEditorModal(props) {
             });
         });
     }
+    function addSpecialMark() {
+        setStudentBlank(function (studentBlank) {
+            var _a;
+            return (__assign(__assign({}, studentBlank), { specialMarks: (_a = studentBlank.specialMarks) !== null && _a !== void 0 ? _a : [] }));
+        });
+    }
+    function removeSpecialMark(index) {
+        setStudentBlank(function (studentBlank) {
+            var _a, _b;
+            return (__assign(__assign({}, studentBlank), { specialMarks: (_b = (_a = studentBlank.specialMarks) === null || _a === void 0 ? void 0 : _a.filter(function (_, i) { return i != index; })) !== null && _b !== void 0 ? _b : [] }));
+        });
+    }
+    function updateSpecialMark(index, value) {
+        setStudentBlank(function (studentBlank) {
+            var _a, _b;
+            return (__assign(__assign({}, studentBlank), { specialMarks: (_b = (_a = studentBlank.specialMarks) === null || _a === void 0 ? void 0 : _a.map(function (mark, i) { return i === index ? value : mark; })) !== null && _b !== void 0 ? _b : [] }));
+        });
+    }
     return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
         react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_6__.Modal, { onClose: function () { return props.onClose(false); }, isOpen: props.isOpen },
-            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_6__.Modal.Header, { onClose: function () { return props.onClose(false); } }, "\u0420\u0435\u0434\u0430\u043A\u0442\u043E\u0440 \u043F\u0440\u043E\u0434\u0443\u043A\u0442\u0430"),
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_6__.Modal.Header, { onClose: function () { return props.onClose(false); } }, "\u0420\u0435\u0434\u0430\u043A\u0442\u043E\u0440 \u0441\u0442\u0443\u0434\u0435\u043D\u0442\u0430"),
             react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_6__.Modal.Body, { sx: {
                     maxWidth: '800px',
                     minWidth: '600px',
@@ -8892,9 +8914,21 @@ function StudentEditorModal(props) {
                     flexDirection: 'column',
                     gap: '12px'
                 } },
-                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'select', title: '\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u044E', options: _tools_types_enum__WEBPACK_IMPORTED_MODULE_8__.Enum.getNumberValues(_domain_Students_Gender__WEBPACK_IMPORTED_MODULE_2__.Gender), getOptionLabel: function (option) { return _domain_Students_Gender__WEBPACK_IMPORTED_MODULE_2__.Gender.getDisplayName(option); }, isOptionEqualToValue: function (a, b) { return a === b; }, value: studentBlank.gender, onChange: function (gender) { return setStudentBlank(function (studentBlank) { return (__assign(__assign({}, studentBlank), { gender: gender })); }); }, required: true }),
-                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'text', title: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435', value: studentBlank.fullName, onChange: function (fullName) { return setStudentBlank(function (studentBlank) { return (__assign(__assign({}, studentBlank), { fullName: fullName })); }); }, required: true }),
-                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'number', title: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0446\u0435\u043D\u0443', value: studentBlank.age, onChange: function (age) { return setStudentBlank(function (studentBlank) { return (__assign(__assign({}, studentBlank), { age: age })); }); }, isAvailableFractionValue: true, required: true })),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'text', title: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0424\u0418\u041E', value: studentBlank.fullName, onChange: function (fullName) { return setStudentBlank(function (studentBlank) { return (__assign(__assign({}, studentBlank), { fullName: fullName })); }); }, required: true }),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'select', title: '\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043F\u043E\u043B', options: _tools_types_enum__WEBPACK_IMPORTED_MODULE_8__.Enum.getNumberValues(_domain_Students_Gender__WEBPACK_IMPORTED_MODULE_2__.Gender), getOptionLabel: function (option) { return _domain_Students_Gender__WEBPACK_IMPORTED_MODULE_2__.Gender.getDisplayName(option); }, isOptionEqualToValue: function (a, b) { return a === b; }, value: studentBlank.gender, onChange: function (gender) { return setStudentBlank(function (studentBlank) { return (__assign(__assign({}, studentBlank), { gender: gender })); }); }, required: true }),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'number', title: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0432\u043E\u0437\u0440\u0430\u0441\u0442', value: studentBlank.age, onChange: function (age) { return setStudentBlank(function (studentBlank) { return (__assign(__assign({}, studentBlank), { age: age })); }); }, isAvailableFractionValue: true, required: true }),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'number', title: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u0440\u0435\u0434\u043D\u044E\u044E \u043E\u0446\u0435\u043D\u043A\u0443', value: studentBlank.averageGrade, onChange: function (averageGrade) { return setStudentBlank(function (studentBlank) { return (__assign(__assign({}, studentBlank), { averageGrade: averageGrade })); }); }, isAvailableFractionValue: true, required: true }),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'select', title: '\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0433\u0440\u0443\u043F\u043F\u0443', options: studentGroups.map(function (g) { return g.id; }), getOptionLabel: function (option) {
+                        var group = studentGroups.find(function (g) { return g.id === option; });
+                        return group ? '${group.abrr} - ${group.name}' : '';
+                    }, isOptionEqualToValue: function (a, b) { return a === b; }, value: studentBlank.studentGroupId, onChange: function (studentGroupId) { return setStudentBlank(function (studentBlank) { return (__assign(__assign({}, studentBlank), { studentGroupId: studentGroupId })); }); }, required: true }),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { style: { display: 'flex', flexDirection: 'column', gap: '8px' } },
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", { style: { fontWeight: 'bold' } }, "\u041E\u0441\u043E\u0431\u044B\u0435 \u043E\u0442\u043C\u0435\u0442\u043A\u0438"),
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_4__.Button, { variant: 'add', title: 'add', size: 'small', onClick: addSpecialMark })), (_a = studentBlank.specialMarks) === null || _a === void 0 ? void 0 :
+                    _a.map(function (mark, index) { return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { key: 'mark_${index}', style: { display: 'flex', gap: '8px' } },
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'text', title: 'mark ${index+1}', value: mark, onChange: function (value) { return updateSpecialMark(index, value !== null && value !== void 0 ? value : ''); } }),
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_4__.Button, { variant: 'remove', size: 'small', onClick: function () { return removeSpecialMark(index); } }))); }))),
             react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_6__.Modal.Footer, null,
                 react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_4__.Button, { variant: 'save', onClick: function () { return saveStudent(); } }))),
         !String.isNullOrWhitespace(errorMessage) &&
@@ -8936,8 +8970,8 @@ function App() {
             react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Routes, null,
                 react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, { element: react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_layout__WEBPACK_IMPORTED_MODULE_3__.Layout, null) },
                     (0,_infrastructure_infrastructureRouter__WEBPACK_IMPORTED_MODULE_4__.InfrastructureRouter)(),
-                    (0,_Students_StudentsRouter__WEBPACK_IMPORTED_MODULE_5__.StudentsRouter)(),
-                    (0,_StudentGroups_StudentGroupsRouter__WEBPACK_IMPORTED_MODULE_6__.StudentGroupsRouter)())))));
+                    (0,_StudentGroups_StudentGroupsRouter__WEBPACK_IMPORTED_MODULE_6__.StudentGroupsRouter)(),
+                    (0,_Students_StudentsRouter__WEBPACK_IMPORTED_MODULE_5__.StudentsRouter)())))));
 }
 
 
@@ -8954,11 +8988,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Home: () => (/* binding */ Home)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/esm/Container/Container.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/esm/Paper/Paper.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/esm/Typography/Typography.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../shared/components/buttons/button */ "./src/shared/components/buttons/button.tsx");
+/* harmony import */ var _Students_StudentsRouter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Students/StudentsRouter */ "./src/app/Students/StudentsRouter.tsx");
+/* harmony import */ var _StudentGroups_StudentGroupsRouter__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../StudentGroups/StudentGroupsRouter */ "./src/app/StudentGroups/StudentGroupsRouter.tsx");
+
+
+
+
 
 function Home() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
+    return (react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_0__["default"], { sx: { height: '100%', display: 'flex', flexDirection: 'column', gap: '12px' }, maxWidth: false, disableGutters: true },
+        react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["default"], { elevation: 3, sx: {
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '24px',
+                gap: '16px'
+            } },
+            react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["default"], { variant: 'h4' }, "\u0421\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A \u0443\u043D\u0438\u0432\u0435\u0440\u0441\u0438\u0442\u0435\u0442\u0430"),
+            react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["default"], { variant: 'body1' }, "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0440\u0430\u0437\u0434\u0435\u043B:"),
+            react__WEBPACK_IMPORTED_MODULE_3___default().createElement("div", { style: { display: 'flex', gap: '12px' } },
+                react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_4__.Button, { variant: 'add', title: '\u0421\u0442\u0443\u0434\u0435\u043D\u0442\u044B', onClick: function () { return window.location.href = _Students_StudentsRouter__WEBPACK_IMPORTED_MODULE_5__.StudentLink.index; } }),
+                react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_4__.Button, { variant: 'add', title: '\u0421\u0442\u0443\u0434\u0435\u043D\u0447\u0435\u0441\u043A\u0438\u0435 \u0433\u0440\u0443\u043F\u043F\u044B', onClick: function () { return window.location.href = _StudentGroups_StudentGroupsRouter__WEBPACK_IMPORTED_MODULE_6__.StudentGroupLink.index; } })))));
 }
 
 
@@ -9149,7 +9206,7 @@ var StudentGroupsProvider = /** @class */ (function () {
             var response, json;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch('/student-groups/save', {
+                    case 0: return [4 /*yield*/, fetch('/studentGroups/save', {
                             method: 'POST',
                             headers: this.headers,
                             body: JSON.stringify(StudentGroupBlank)
@@ -9169,7 +9226,7 @@ var StudentGroupsProvider = /** @class */ (function () {
             var response, json;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch("/student-groups/get-page?page=".concat(page, "&count=").concat(count), {
+                    case 0: return [4 /*yield*/, fetch("/studentGroups/get-page?page=".concat(page, "&count=").concat(count), {
                             method: 'GET',
                             headers: this.headers
                         })];
@@ -9188,7 +9245,7 @@ var StudentGroupsProvider = /** @class */ (function () {
             var response, json;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch("/student-groups/get-by-id?studentGroupId=".concat(id), {
+                    case 0: return [4 /*yield*/, fetch("/studentGroups/get-by-id?studentGroupId=".concat(id), {
                             method: 'GET',
                             headers: this.headers
                         })];
@@ -9207,7 +9264,7 @@ var StudentGroupsProvider = /** @class */ (function () {
             var response, json;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch("/student-groups/remove?studentGroupId=".concat(id), {
+                    case 0: return [4 /*yield*/, fetch("/studentGroups/remove?studentGroupId=".concat(id), {
                             method: 'GET',
                             headers: this.headers
                         })];

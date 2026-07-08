@@ -56,7 +56,7 @@ export function StudentGroupEditorModal(props: Props) {
 	return (
 		<>
 			<Modal onClose={() => props.onClose(false)} isOpen={props.isOpen}>
-				<Modal.Header onClose={() => props.onClose(false)}>Редактор продукта</Modal.Header>
+				<Modal.Header onClose={() => props.onClose(false)}>Редактор Студентческой группы</Modal.Header>
 				<Modal.Body
 					sx={{
 						maxWidth: '800px',
@@ -66,26 +66,15 @@ export function StudentGroupEditorModal(props: Props) {
 						gap: '12px'
 					}}>
 					<Input
-						variant='select'
-						title='Выберите категорию'
-						options={Enum.getNumberValues<StudyFormat>(StudyFormat)}
-						getOptionLabel={(option) => StudyFormat.getDisplayName(option)}
-						isOptionEqualToValue={(a, b) => a === b}
-						value={studentGroupBlank.studyFormat}
-						onChange={(studyFormat) => setStudentGroupBlank((studentGroupBlank) => ({ ...studentGroupBlank, studyFormat }))}
-						required
-					/>
-					<Input
 						variant='text'
-						title='Введите название'
+						title='Введите название группы'
 						value={studentGroupBlank.name}
 						onChange={(name) => setStudentGroupBlank((studentGroupBlank) => ({ ...studentGroupBlank, name }))}
 						required
 					/>
 					<Input
-						variant='text-area'
+						variant='text'
 						title='Введите аббревиатуру'
-						minRows={2}
 						value={studentGroupBlank.abbr}
 						onChange={(abbr) =>
 							setStudentGroupBlank((studentGroupBlank) => ({ ...studentGroupBlank, abbr }))
@@ -93,10 +82,28 @@ export function StudentGroupEditorModal(props: Props) {
 					/>
 					<Input
 						variant='number'
-						title='Введите формат'
+						title='Введите год начала обучения'
+						value={studentGroupBlank.startYear}
+						onChange={(startYear) => setStudentGroupBlank((studentGroupBlank) => ({ ...studentGroupBlank, startYear }))}
+						isAvailableFractionValue
+						required
+					/>
+					<Input
+						variant='number'
+						title='Введите год конца обучения'
+						value={studentGroupBlank.endYear}
+						onChange={(endYear) => setStudentGroupBlank((studentGroupBlank) => ({ ...studentGroupBlank, endYear }))}
+						isAvailableFractionValue
+						required
+					/>
+					<Input
+						variant='select'
+						title='Выберите формат обучения'
+						options={Enum.getNumberValues<StudyFormat>(StudyFormat)}
+						getOptionLabel={(option) => StudyFormat.getDisplayName(option)}
+						isOptionEqualToValue={(a, b) => a === b}
 						value={studentGroupBlank.studyFormat}
 						onChange={(studyFormat) => setStudentGroupBlank((studentGroupBlank) => ({ ...studentGroupBlank, studyFormat }))}
-						isAvailableFractionValue
 						required
 					/>
 				</Modal.Body>

@@ -13,8 +13,9 @@ export function App() {
 				<Routes>
 					<Route element={<Layout />}>
 						{InfrastructureRouter()}
-						{StudentsRouter()}
 						{StudentGroupsRouter()}
+						{StudentsRouter()}
+						
 					</Route>
 				</Routes>
 			</BrowserRouter>
