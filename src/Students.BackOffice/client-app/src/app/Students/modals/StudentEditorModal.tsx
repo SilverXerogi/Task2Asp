@@ -9,7 +9,7 @@ import { Modal } from '../../../shared/components/modals/modal';
 import { Notification } from '../../../shared/components/notification';
 import { Enum } from '../../../tools/types/enum';
 import { StudentGroup } from '../../../domain/StudentGroups/StudentGroup';
-//import { StudentGroupsProvider } from '../../../domain/StudentGroups/StudentGroupsProvider';
+import { StudentGroupsProvider } from '../../../domain/StudentGroups/StudentGroupsProvider';
 
 interface Props {
 	studentId: string | null;
@@ -25,8 +25,8 @@ export function StudentEditorModal(props: Props) {
 	useEffect(() => {
 		if (!props.isOpen) return;
 		async function loadData() {
-			//const studentGroupsPage = await StudentGroupsProvider.getStudentGroupsPage(1, 15);
-			//setStudentGroups(studentGroupsPage.values); загрузка списка групп для отображения в списке
+			const studentGroupsPage = await StudentGroupsProvider.getStudentGroupsPage(1, 15);
+			setStudentGroups(studentGroupsPage.values); 
 			
 			let studentBlank: StudentBlank | null = null;
 
@@ -129,7 +129,7 @@ export function StudentEditorModal(props: Props) {
 						options={studentGroups.map(g => g.id)}
 						getOptionLabel={(option) => {
 							const group = studentGroups.find(g => g.id === option);
-							return group ? '${group.abrr} - ${group.name}' : ''
+							return group ? `${group.abbr} - ${group.name}` : ''
 						}}
 						isOptionEqualToValue={(a, b) => a === b}
 						value={studentBlank.studentGroupId}
@@ -142,10 +142,10 @@ export function StudentEditorModal(props: Props) {
 							<Button variant='add' title='add' size='small' onClick={addSpecialMark} />
 						</div>
 						{studentBlank.specialMarks?.map((mark, index) => (
-							<div key={'mark_${index}'} style={{ display: 'flex', gap: '8px' }}>
+							<div key={`mark_${index}`} style={{ display: 'flex', gap: '8px' }}>
 								<Input
 									variant='text'
-									title={'mark ${index+1}'}
+									title={`mark ${index+1}`}
 									value={mark}
 									onChange={(value)=>updateSpecialMark(index, value ?? '') }
 								/>

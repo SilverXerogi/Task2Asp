@@ -8775,6 +8775,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../shared/components/modals/modal */ "./src/shared/components/modals/modal.tsx");
 /* harmony import */ var _shared_components_notification__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../shared/components/notification */ "./src/shared/components/notification.tsx");
 /* harmony import */ var _tools_types_enum__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../tools/types/enum */ "./src/tools/types/enum.ts");
+/* harmony import */ var _domain_StudentGroups_StudentGroupsProvider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../domain/StudentGroups/StudentGroupsProvider */ "./src/domain/StudentGroups/StudentGroupsProvider.ts");
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -8831,6 +8832,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 function StudentEditorModal(props) {
     var _a;
     var _b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_domain_Students_StudentBlank__WEBPACK_IMPORTED_MODULE_1__.StudentBlank.getEmpty()), studentBlank = _b[0], setStudentBlank = _b[1];
@@ -8841,20 +8843,23 @@ function StudentEditorModal(props) {
             return;
         function loadData() {
             return __awaiter(this, void 0, void 0, function () {
-                var studentBlank, student;
+                var studentGroupsPage, studentBlank, student;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0:
-                            studentBlank = null;
-                            if (!(props.studentId != null)) return [3 /*break*/, 2];
-                            return [4 /*yield*/, _domain_Students_StudentsProvider__WEBPACK_IMPORTED_MODULE_3__.StudentsProvider.getStudentById(props.studentId)];
+                        case 0: return [4 /*yield*/, _domain_StudentGroups_StudentGroupsProvider__WEBPACK_IMPORTED_MODULE_9__.StudentGroupsProvider.getStudentGroupsPage(1, 15)];
                         case 1:
+                            studentGroupsPage = _a.sent();
+                            setStudentGroups(studentGroupsPage.values);
+                            studentBlank = null;
+                            if (!(props.studentId != null)) return [3 /*break*/, 3];
+                            return [4 /*yield*/, _domain_Students_StudentsProvider__WEBPACK_IMPORTED_MODULE_3__.StudentsProvider.getStudentById(props.studentId)];
+                        case 2:
                             student = _a.sent();
                             if (student == null)
                                 throw 'Student is null';
                             studentBlank = _domain_Students_StudentBlank__WEBPACK_IMPORTED_MODULE_1__.StudentBlank.getFromStudent(student);
-                            _a.label = 2;
-                        case 2:
+                            _a.label = 3;
+                        case 3:
                             setStudentBlank(studentBlank !== null && studentBlank !== void 0 ? studentBlank : _domain_Students_StudentBlank__WEBPACK_IMPORTED_MODULE_1__.StudentBlank.getEmpty());
                             return [2 /*return*/];
                     }
@@ -8920,14 +8925,14 @@ function StudentEditorModal(props) {
                 react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'number', title: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u0440\u0435\u0434\u043D\u044E\u044E \u043E\u0446\u0435\u043D\u043A\u0443', value: studentBlank.averageGrade, onChange: function (averageGrade) { return setStudentBlank(function (studentBlank) { return (__assign(__assign({}, studentBlank), { averageGrade: averageGrade })); }); }, isAvailableFractionValue: true, required: true }),
                 react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'select', title: '\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0433\u0440\u0443\u043F\u043F\u0443', options: studentGroups.map(function (g) { return g.id; }), getOptionLabel: function (option) {
                         var group = studentGroups.find(function (g) { return g.id === option; });
-                        return group ? '${group.abrr} - ${group.name}' : '';
+                        return group ? "".concat(group.abbr, " - ").concat(group.name) : '';
                     }, isOptionEqualToValue: function (a, b) { return a === b; }, value: studentBlank.studentGroupId, onChange: function (studentGroupId) { return setStudentBlank(function (studentBlank) { return (__assign(__assign({}, studentBlank), { studentGroupId: studentGroupId })); }); }, required: true }),
                 react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { style: { display: 'flex', flexDirection: 'column', gap: '8px' } },
                     react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
                         react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", { style: { fontWeight: 'bold' } }, "\u041E\u0441\u043E\u0431\u044B\u0435 \u043E\u0442\u043C\u0435\u0442\u043A\u0438"),
                         react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_4__.Button, { variant: 'add', title: 'add', size: 'small', onClick: addSpecialMark })), (_a = studentBlank.specialMarks) === null || _a === void 0 ? void 0 :
-                    _a.map(function (mark, index) { return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { key: 'mark_${index}', style: { display: 'flex', gap: '8px' } },
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'text', title: 'mark ${index+1}', value: mark, onChange: function (value) { return updateSpecialMark(index, value !== null && value !== void 0 ? value : ''); } }),
+                    _a.map(function (mark, index) { return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { key: "mark_".concat(index), style: { display: 'flex', gap: '8px' } },
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'text', title: "mark ".concat(index + 1), value: mark, onChange: function (value) { return updateSpecialMark(index, value !== null && value !== void 0 ? value : ''); } }),
                         react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_4__.Button, { variant: 'remove', size: 'small', onClick: function () { return removeSpecialMark(index); } }))); }))),
             react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_6__.Modal.Footer, null,
                 react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_4__.Button, { variant: 'save', onClick: function () { return saveStudent(); } }))),
@@ -9072,21 +9077,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_types_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/types/page */ "./src/tools/types/page.ts");
 
 var StudentGroup = /** @class */ (function () {
-    function StudentGroup(id, name, abbr, startYear, endYear, studyFormat) {
+    function StudentGroup(id, name, abbr, startYear, endYear, studyFormat, period) {
         this.id = id;
         this.name = name;
         this.abbr = abbr;
         this.startYear = startYear;
         this.endYear = endYear;
         this.studyFormat = studyFormat;
+        this.period = period;
     }
-    Object.defineProperty(StudentGroup.prototype, "period", {
-        get: function () {
-            return '${this.startYear}-${this.endYear}';
-        },
-        enumerable: false,
-        configurable: true
-    });
     return StudentGroup;
 }());
 
@@ -9097,7 +9096,7 @@ function mapToStudentGroups(data) {
     return data.map(mapToStudentGroup);
 }
 function mapToStudentGroup(data) {
-    return new StudentGroup(data.id, data.name, data.abbr, data.startYear, data.endYear, data.studyFormat);
+    return new StudentGroup(data.id, data.name, data.abbr, data.startYear, data.endYear, data.studyFormat, "".concat(data.startYear, " - ").concat(data.endYear));
 }
 
 

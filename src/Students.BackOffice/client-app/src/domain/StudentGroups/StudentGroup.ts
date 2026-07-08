@@ -8,11 +8,9 @@ export class StudentGroup {
 		public readonly abbr: string,
 		public readonly startYear: number,
 		public readonly endYear: number,
-		public readonly studyFormat: StudyFormat
+		public readonly studyFormat: StudyFormat,
+		public readonly period: string
 	) { }
-	public get period(): string {
-		return '${this.startYear}-${this.endYear}';
-	}
 }
 
 export function mapToStudentGroupsPage(data: any): Page<StudentGroup> {
@@ -30,6 +28,7 @@ export function mapToStudentGroup(data: any): StudentGroup {
 		data.abbr,
 		data.startYear,
 		data.endYear,
-		data.studyFormat
+		data.studyFormat,
+		`${data.startYear} - ${data.endYear}`
 	);
 }
