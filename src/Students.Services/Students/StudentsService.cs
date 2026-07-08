@@ -11,6 +11,9 @@ public class StudentsService(IStudentsRepository studentsRepository) : IStudents
 {
     public async Task<Result> SaveStudent(StudentBlank studentBlank)
     {
+        Console.WriteLine(studentBlank);
+        if (studentBlank == null)
+            return Result.Fail("Данные студента не переданы (studentBlank is null)");
         DataResult<Student> validationResult = await ValidateStudentBlank(studentBlank);
         if (validationResult.IsFail(out Student student)) return validationResult.ToResult();
 

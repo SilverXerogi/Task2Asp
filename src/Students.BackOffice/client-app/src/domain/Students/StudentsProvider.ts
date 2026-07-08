@@ -10,10 +10,11 @@ export class StudentsProvider {
 	];
 
 	public static async saveStudent(studentBlank: StudentBlank): Promise<Result> {
+		console.log(studentBlank);
 		const response = await fetch('/students/save', {
 			method: 'POST',
 			headers: this.headers,
-			body: JSON.stringify(StudentBlank)
+			body: JSON.stringify(studentBlank)
 		});
 		const json = await response.json();
 

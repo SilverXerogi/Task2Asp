@@ -9458,7 +9458,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _tools_types_results_result__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/types/results/result */ "./src/tools/types/results/result.ts");
 /* harmony import */ var _Student__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Student */ "./src/domain/Students/Student.ts");
-/* harmony import */ var _StudentBlank__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./StudentBlank */ "./src/domain/Students/StudentBlank.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -9497,7 +9496,6 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 };
 
 
-
 var StudentsProvider = /** @class */ (function () {
     function StudentsProvider() {
     }
@@ -9506,11 +9504,13 @@ var StudentsProvider = /** @class */ (function () {
             var response, json;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch('/students/save', {
-                            method: 'POST',
-                            headers: this.headers,
-                            body: JSON.stringify(_StudentBlank__WEBPACK_IMPORTED_MODULE_2__.StudentBlank)
-                        })];
+                    case 0:
+                        console.log(studentBlank);
+                        return [4 /*yield*/, fetch('/students/save', {
+                                method: 'POST',
+                                headers: this.headers,
+                                body: JSON.stringify(studentBlank)
+                            })];
                     case 1:
                         response = _a.sent();
                         return [4 /*yield*/, response.json()];

@@ -4,7 +4,7 @@ namespace Students.Tools.Utils;
 
 public static class DatabaseUtils
 {
-	private const String _connectionString = "Server=192.168.200.124;Username=postgres;Password=User18;Database=Students";
+	private const String _connectionString = "Server=192.168.0.103;Username=postgres;Password=User18;Database=Students";
 
     public static Task<Int32> ExecuteAsync(String sql, Action<NpgsqlParameterCollection> parameters)
     {
