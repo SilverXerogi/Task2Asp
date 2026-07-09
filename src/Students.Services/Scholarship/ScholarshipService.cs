@@ -1,43 +1,34 @@
 ﻿using Goods.Services.Products.Repositories;
 using Students.Domain.Services;
-using Students.Domain.Students;
 using Students.Services.StudentGroups.Repositories;
 using Students.Services.Students.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Students.Services.Scholarship
+namespace Students.Services.Scholarship;
+
+public class ScholarshipService(
+    IStudentsRepository studentsRepository,
+    IStudentGroupsRepository studentGroupsRepository
+) : IScholarshipService
 {
-    public class ScholarshipService(IStudentsRepository studentsRepository, IStudentGroupsRepository studentGroupsRepository) : IScholarshipService
+    public async Task<float> CalculateStudentScholarshipAsync(Guid studentId)
     {
-        public async Task<float> CalculateTotalScholarshipAsync()
-        {
-            var students = await studentsRepository.GetAllStudentsAsync();
-        var groups = await studentGroupsRepository.GetAllGroupsAsync();
-
-        var groupsDict = groups.ToDictionary(g => g.Id);
+        var student = await studentsRepository.GetStudent(studentId);
+        if (student == null)
+            throw new Exception($"Студент с ID {studentId} не найден");
+        if (student.AverageGrade < 4.0)
+            return 0;
+        var group = await studentGroupsRepository.GetStudentGroup(student.StudentGroupId);
+        if (group == null)
+            throw new Exception($"Группа с ID {student.StudentGroupId} не найдена");
 
         int currentYear = DateTime.UtcNow.Year;
-        float totalSum = 0;
+        int course = currentYear - group.StartYear + 1;
+        if (course < 1) course = 1;
 
-            foreach (var student in students)
-            {
-                if (groupsDict.TryGetValue(student.StudentGroupId, out var group))
-                {
-                    int course = currentYear - group.StartYear + 1;
-                    if (course< 1) course = 1;
+        float scholarship = student.AverageGrade
+                              * 500
+                              * (float)Math.Sqrt((double)course);
 
-                        float scholarship = student.AverageGrade;
-                        scholarship = scholarship* 500 * (float) Math.Sqrt((double) course);
-
-                        totalSum += scholarship;
-                }
-            }
-
-        return totalSum;
-        }
+        return scholarship;
     }
 }

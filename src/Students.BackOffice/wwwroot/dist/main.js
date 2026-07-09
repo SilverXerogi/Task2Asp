@@ -8553,12 +8553,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _domain_Students_StudentsProvider__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../domain/Students/StudentsProvider */ "./src/domain/Students/StudentsProvider.ts");
 /* harmony import */ var _shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../shared/components/buttons/button */ "./src/shared/components/buttons/button.tsx");
 /* harmony import */ var _shared_components_modals_confirmModal__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../shared/components/modals/confirmModal */ "./src/shared/components/modals/confirmModal.tsx");
-/* harmony import */ var _shared_components_notification__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../shared/components/notification */ "./src/shared/components/notification.tsx");
-/* harmony import */ var _shared_components_tablePagination__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../shared/components/tablePagination */ "./src/shared/components/tablePagination.tsx");
-/* harmony import */ var _shared_types_confirmModalState__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../shared/types/confirmModalState */ "./src/shared/types/confirmModalState.ts");
-/* harmony import */ var _tools_types_pagination__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../tools/types/pagination */ "./src/tools/types/pagination.ts");
-/* harmony import */ var _modals_StudentEditorModal__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modals/StudentEditorModal */ "./src/app/Students/modals/StudentEditorModal.tsx");
-/* harmony import */ var _domain_StudentGroups_StudentGroupsProvider__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../domain/StudentGroups/StudentGroupsProvider */ "./src/domain/StudentGroups/StudentGroupsProvider.ts");
+/* harmony import */ var _shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../shared/components/modals/modal */ "./src/shared/components/modals/modal.tsx");
+/* harmony import */ var _shared_components_notification__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../shared/components/notification */ "./src/shared/components/notification.tsx");
+/* harmony import */ var _shared_components_tablePagination__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../shared/components/tablePagination */ "./src/shared/components/tablePagination.tsx");
+/* harmony import */ var _shared_types_confirmModalState__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../shared/types/confirmModalState */ "./src/shared/types/confirmModalState.ts");
+/* harmony import */ var _tools_types_pagination__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../tools/types/pagination */ "./src/tools/types/pagination.ts");
+/* harmony import */ var _modals_StudentEditorModal__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./modals/StudentEditorModal */ "./src/app/Students/modals/StudentEditorModal.tsx");
+/* harmony import */ var _domain_StudentGroups_StudentGroupsProvider__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../domain/StudentGroups/StudentGroupsProvider */ "./src/domain/StudentGroups/StudentGroupsProvider.ts");
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -8618,16 +8619,24 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 function StudentsPage() {
     var _a = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)([]), students = _a[0], setStudents = _a[1];
-    var _b = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)(_tools_types_pagination__WEBPACK_IMPORTED_MODULE_17__.Pagination.default), pagination = _b[0], setPagination = _b[1];
+    var _b = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)(_tools_types_pagination__WEBPACK_IMPORTED_MODULE_18__.Pagination.default), pagination = _b[0], setPagination = _b[1];
     var _c = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)([]), groups = _c[0], setGroups = _c[1];
     var _d = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)({
         studentId: null,
         isOpen: false
     }), studentEditorModalState = _d[0], setStudentEditorModalState = _d[1];
-    var _e = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)(__assign({ studentId: null }, _shared_types_confirmModalState__WEBPACK_IMPORTED_MODULE_16__.ConfirmModalState.getClosed())), removeStudentConfirmModalState = _e[0], setRemoveStudentConfirmModalState = _e[1];
-    var _f = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)(null), errorMessage = _f[0], setErrorMessage = _f[1];
+    var _e = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)({
+        isOpen: false,
+        studentId: null,
+        studentName: '',
+        scholarshipAmount: null,
+        isLoading: false
+    }), scholarshipModalState = _e[0], setScholarshipModalState = _e[1];
+    var _f = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)(__assign({ studentId: null }, _shared_types_confirmModalState__WEBPACK_IMPORTED_MODULE_17__.ConfirmModalState.getClosed())), removeStudentConfirmModalState = _f[0], setRemoveStudentConfirmModalState = _f[1];
+    var _g = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)(null), errorMessage = _g[0], setErrorMessage = _g[1];
     (0,react__WEBPACK_IMPORTED_MODULE_9__.useEffect)(function () {
         loadStudentsPage(__assign({}, pagination));
         loadGroups();
@@ -8637,7 +8646,7 @@ function StudentsPage() {
             var studentGroupsPage;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, _domain_StudentGroups_StudentGroupsProvider__WEBPACK_IMPORTED_MODULE_19__.StudentGroupsProvider.getStudentGroupsPage(1, 15)];
+                    case 0: return [4 /*yield*/, _domain_StudentGroups_StudentGroupsProvider__WEBPACK_IMPORTED_MODULE_20__.StudentGroupsProvider.getStudentGroupsPage(1, 15)];
                     case 1:
                         studentGroupsPage = _a.sent();
                         setGroups(studentGroupsPage.values);
@@ -8671,7 +8680,7 @@ function StudentsPage() {
     }
     function openRemoveStudentConfirmModal(studentId, studentName) {
         console.log("remove student id", { studentId: studentId });
-        setRemoveStudentConfirmModalState(__assign({ studentId: studentId }, _shared_types_confirmModalState__WEBPACK_IMPORTED_MODULE_16__.ConfirmModalState.getOpen("\u0412\u044B \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u043E \u0445\u043E\u0442\u0438\u0442\u0435 \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u043F\u0440\u043E\u0434\u0443\u043A\u0442 \"".concat(studentName, "\""))));
+        setRemoveStudentConfirmModalState(__assign({ studentId: studentId }, _shared_types_confirmModalState__WEBPACK_IMPORTED_MODULE_17__.ConfirmModalState.getOpen("\u0412\u044B \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u043E \u0445\u043E\u0442\u0438\u0442\u0435 \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u0441\u0442\u0443\u0434\u0435\u043D\u0442\u0430 \"".concat(studentName, "\""))));
     }
     function closeRemoveStudentConfirmModal(isConfirmed) {
         return __awaiter(this, void 0, void 0, function () {
@@ -8692,10 +8701,51 @@ function StudentsPage() {
                         loadStudentsPage(__assign(__assign({}, pagination), { page: 1 }));
                         _a.label = 2;
                     case 2:
-                        setRemoveStudentConfirmModalState(__assign({ studentId: null }, _shared_types_confirmModalState__WEBPACK_IMPORTED_MODULE_16__.ConfirmModalState.getClosed()));
+                        setRemoveStudentConfirmModalState(__assign({ studentId: null }, _shared_types_confirmModalState__WEBPACK_IMPORTED_MODULE_17__.ConfirmModalState.getClosed()));
                         return [2 /*return*/];
                 }
             });
+        });
+    }
+    function openScholarshipModal(studentId, studentName) {
+        return __awaiter(this, void 0, void 0, function () {
+            var amount_1, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        setScholarshipModalState({
+                            isOpen: true,
+                            studentId: studentId,
+                            studentName: studentName,
+                            scholarshipAmount: null,
+                            isLoading: true
+                        });
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, _domain_Students_StudentsProvider__WEBPACK_IMPORTED_MODULE_11__.StudentsProvider.calculateForStudent(studentId)];
+                    case 2:
+                        amount_1 = _a.sent();
+                        setScholarshipModalState(function (prev) { return (__assign(__assign({}, prev), { scholarshipAmount: amount_1, isLoading: false })); });
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_1 = _a.sent();
+                        console.error('Ошибка при расчёте стипендии:', error_1);
+                        setScholarshipModalState(function (prev) { return (__assign(__assign({}, prev), { isLoading: false, scholarshipAmount: null })); });
+                        setErrorMessage('Не удалось рассчитать стипендию');
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    }
+    function closeScholarshipModal() {
+        setScholarshipModalState({
+            isOpen: false,
+            studentId: null,
+            studentName: '',
+            scholarshipAmount: null,
+            isLoading: false
         });
     }
     function getGroupName(groupId) {
@@ -8728,7 +8778,7 @@ function StudentsPage() {
                     react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], null,
                         students.length === 0 &&
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], null,
-                                react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { colSpan: 5 }, "\u041F\u0443\u0441\u0442\u043E")),
+                                react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { colSpan: 8 }, "\u041F\u0443\u0441\u0442\u043E")),
                         students.map(function (student) { return (react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], { key: "student__".concat(student.id) },
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: '25%' }, student.fullName),
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: '10%' }, _domain_Students_Gender__WEBPACK_IMPORTED_MODULE_10__.Gender.getDisplayName(student.gender)),
@@ -8738,13 +8788,40 @@ function StudentsPage() {
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: '22%' }, student.specialMarksText || '—'),
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: '22%' }, getGroupName(student.studentGroupId)),
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], null,
+                                react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_12__.Button, { type: 'icon', variant: 'add', size: 'small', title: '\u0420\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u0442\u044C \u0441\u0442\u0438\u043F\u0435\u043D\u0434\u0438\u044E', onClick: function () { return openScholarshipModal(student.id, student.fullName); } }),
                                 react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_12__.Button, { type: 'icon', variant: 'edit', size: 'small', onClick: function () { return openStudentEditorModal(student.id); } }),
                                 react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_12__.Button, { type: 'icon', variant: 'remove', size: 'small', onClick: function () { return openRemoveStudentConfirmModal(student.id, student.fullName); } })))); })))),
-            react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_tablePagination__WEBPACK_IMPORTED_MODULE_15__.TablePagination, { countInPageOptions: _tools_types_pagination__WEBPACK_IMPORTED_MODULE_17__.Pagination.pageSizeOptions, page: pagination.page, countInPage: pagination.pageSize, totalRows: pagination.totalRows, changePage: function (page) { return loadStudentsPage(__assign(__assign({}, pagination), { page: page })); }, changeCountInPage: function (pageSize) { return loadStudentsPage(__assign(__assign({}, pagination), { pageSize: pageSize })); } })),
-        react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_modals_StudentEditorModal__WEBPACK_IMPORTED_MODULE_18__.StudentEditorModal, { isOpen: studentEditorModalState.isOpen, studentId: studentEditorModalState.studentId, onClose: closeStudentEditorModal }),
+            react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_tablePagination__WEBPACK_IMPORTED_MODULE_16__.TablePagination, { countInPageOptions: _tools_types_pagination__WEBPACK_IMPORTED_MODULE_18__.Pagination.pageSizeOptions, page: pagination.page, countInPage: pagination.pageSize, totalRows: pagination.totalRows, changePage: function (page) { return loadStudentsPage(__assign(__assign({}, pagination), { page: page })); }, changeCountInPage: function (pageSize) { return loadStudentsPage(__assign(__assign({}, pagination), { pageSize: pageSize })); } })),
+        react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_modals_StudentEditorModal__WEBPACK_IMPORTED_MODULE_19__.StudentEditorModal, { isOpen: studentEditorModalState.isOpen, studentId: studentEditorModalState.studentId, onClose: closeStudentEditorModal }),
         react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_modals_confirmModal__WEBPACK_IMPORTED_MODULE_13__.ConfirmModal, { title: removeStudentConfirmModalState.title, onClose: function (isConfirmed) { return closeRemoveStudentConfirmModal(isConfirmed); }, isOpen: removeStudentConfirmModalState.isOpen }),
+        react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_14__.Modal, { isOpen: scholarshipModalState.isOpen, onClose: closeScholarshipModal },
+            react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_14__.Modal.Header, { onClose: closeScholarshipModal }, "\u0420\u0430\u0441\u0447\u0451\u0442 \u0441\u0442\u0438\u043F\u0435\u043D\u0434\u0438\u0438"),
+            react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_14__.Modal.Body, { sx: {
+                    maxWidth: '500px',
+                    minWidth: '400px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '16px',
+                    padding: '24px'
+                } },
+                react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["default"], { variant: 'h6' },
+                    "\u0421\u0442\u0443\u0434\u0435\u043D\u0442: ",
+                    scholarshipModalState.studentName),
+                scholarshipModalState.isLoading && (react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["default"], { variant: 'body1', color: 'text.secondary' }, "\u0420\u0430\u0441\u0441\u0447\u0438\u0442\u044B\u0432\u0430\u0435\u043C \u0441\u0442\u0438\u043F\u0435\u043D\u0434\u0438\u044E...")),
+                !scholarshipModalState.isLoading && scholarshipModalState.scholarshipAmount === null && (react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["default"], { variant: 'body1', color: 'error' }, "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0440\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u0442\u044C \u0441\u0442\u0438\u043F\u0435\u043D\u0434\u0438\u044E")),
+                scholarshipModalState.scholarshipAmount !== null && (react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["default"], { elevation: 2, sx: {
+                        padding: '16px',
+                        backgroundColor: '#e3f2fd',
+                        textAlign: 'center'
+                    } },
+                    react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["default"], { variant: 'body2', color: 'text.secondary' }, "\u0420\u0430\u0437\u043C\u0435\u0440 \u0441\u0442\u0438\u043F\u0435\u043D\u0434\u0438\u0438:"),
+                    react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["default"], { variant: 'h4', color: 'primary', sx: { fontWeight: 'bold', marginTop: '8px' } },
+                        scholarshipModalState.scholarshipAmount.toFixed(2),
+                        " \u20BD")))),
+            react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_14__.Modal.Footer, null,
+                react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_12__.Button, { variant: 'close', title: '\u0417\u0430\u043A\u0440\u044B\u0442\u044C', onClick: closeScholarshipModal }))),
         !String.isNullOrWhitespace(errorMessage) &&
-            react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_notification__WEBPACK_IMPORTED_MODULE_14__.Notification, { severity: 'error', message: errorMessage, onClose: function () { return setErrorMessage(null); } })));
+            react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_notification__WEBPACK_IMPORTED_MODULE_15__.Notification, { severity: 'error', message: errorMessage, onClose: function () { return setErrorMessage(null); } })));
 }
 
 
@@ -9599,12 +9676,12 @@ var StudentsProvider = /** @class */ (function () {
             });
         });
     };
-    StudentsProvider.calculateScholarship = function () {
+    StudentsProvider.calculateForStudent = function (studentId) {
         return __awaiter(this, void 0, void 0, function () {
             var response, json;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch("/calculateScholarship", {
+                    case 0: return [4 /*yield*/, fetch("/scholarships/calculate?studentId=".concat(studentId), {
                             method: 'GET',
                             headers: this.headers
                         })];

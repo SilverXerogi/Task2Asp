@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Students.BackOffice.Controllers.Infrastructure;
 using Students.Domain.Services;
-using Students.Domain.Students;
-using Students.Tools.Types.Results;
 
-namespace Students.BackOffice.Controllers.Scholarship
+namespace Students.BackOffice.Controllers.Scholarships;
+
+[ApiController]
+[Route("scholarships")]
+public class ScholarshipsController(IScholarshipService scholarshipService) : BaseController
 {
-    public class ScholarshipController(IStudentsService studentsService, IScholarshipService scholarshipService) : BaseController
+    [HttpGet("calculate")]
+    public async Task<ActionResult<decimal>> CalculateForStudent([FromQuery] Guid studentId)
     {
-        [HttpPost("calculateScholarship")]
-        public async Task<ActionResult<float>> CalculateTotalScholarshipAsync()
-        {
-            var sum = await scholarshipService.CalculateTotalScholarshipAsync();
-            return sum;
-        }
+        var sum = await scholarshipService.CalculateStudentScholarshipAsync(studentId);
+        return Ok(sum);
     }
 }

@@ -15,6 +15,7 @@ import { Gender } from '../../domain/Students/Gender';
 import { StudentsProvider } from '../../domain/Students/StudentsProvider';
 import { Button } from '../../shared/components/buttons/button';
 import { ConfirmModal } from '../../shared/components/modals/confirmModal';
+import { Modal } from '../../shared/components/modals/modal';
 import { Notification } from '../../shared/components/notification';
 import { TablePagination } from '../../shared/components/tablePagination';
 import { ConfirmModalState } from '../../shared/types/confirmModalState';
@@ -26,6 +27,14 @@ import { StudentGroupsProvider } from '../../domain/StudentGroups/StudentGroupsP
 type StudentEditorModalState = {
 	studentId: string | null;
 	isOpen: boolean;
+};
+
+type ScholarshipModalState = {
+	isOpen: boolean;
+	studentId: string | null;
+	studentName: string;
+	scholarshipAmount: number | null;
+	isLoading: boolean;
 };
 
 interface RemoveStudentConfirmModalState extends ConfirmModalState {
@@ -40,6 +49,13 @@ export function StudentsPage() {
 		studentId: null,
 		isOpen: false
 	});
+	const [scholarshipModalState, setScholarshipModalState] = useState<ScholarshipModalState>({
+		isOpen: false,
+		studentId: null,
+		studentName: '',
+		scholarshipAmount: null,
+		isLoading: false
+	});
 	const [removeStudentConfirmModalState, setRemoveStudentConfirmModalState] =
 		useState<RemoveStudentConfirmModalState>({ studentId: null, ...ConfirmModalState.getClosed() });
 
@@ -49,10 +65,12 @@ export function StudentsPage() {
 		loadStudentsPage({ ...pagination });
 		loadGroups();
 	}, []);
+
 	async function loadGroups() {
 		const studentGroupsPage = await StudentGroupsProvider.getStudentGroupsPage(1, 15);
-		setGroups(studentGroupsPage.values); 
+		setGroups(studentGroupsPage.values);
 	}
+
 	async function loadStudentsPage(newPagination: Pagination) {
 		const studentsPage = await StudentsProvider.getStudentsPage(newPagination.page, newPagination.pageSize);
 
@@ -78,7 +96,7 @@ export function StudentsPage() {
 		console.log("remove student id", { studentId })
 		setRemoveStudentConfirmModalState({
 			studentId,
-			...ConfirmModalState.getOpen(`Вы действительно хотите удалить продукт "${studentName}"`)
+			...ConfirmModalState.getOpen(`Вы действительно хотите удалить студента "${studentName}"`)
 		});
 	}
 
@@ -97,10 +115,49 @@ export function StudentsPage() {
 
 		setRemoveStudentConfirmModalState({ studentId: null, ...ConfirmModalState.getClosed() });
 	}
+
+	async function openScholarshipModal(studentId: string, studentName: string) {
+		setScholarshipModalState({
+			isOpen: true,
+			studentId,
+			studentName,
+			scholarshipAmount: null,
+			isLoading: true
+		});
+
+		try {
+			const amount = await StudentsProvider.calculateForStudent(studentId);
+			setScholarshipModalState((prev) => ({
+				...prev,
+				scholarshipAmount: amount,
+				isLoading: false
+			}));
+		} catch (error) {
+			console.error('Ошибка при расчёте стипендии:', error);
+			setScholarshipModalState((prev) => ({
+				...prev,
+				isLoading: false,
+				scholarshipAmount: null
+			}));
+			setErrorMessage('Не удалось рассчитать стипендию');
+		}
+	}
+
+	function closeScholarshipModal() {
+		setScholarshipModalState({
+			isOpen: false,
+			studentId: null,
+			studentName: '',
+			scholarshipAmount: null,
+			isLoading: false
+		});
+	}
+
 	function getGroupName(groupId: string): string {
 		const group = groups.find(g => g.id === groupId);
 		return group ? `${group.abbr} - ${group.name}` : '-';
 	}
+
 	return (
 		<Container
 			sx={{ height: '100%', display: 'flex', flexDirection: 'column', gap: '12px' }}
@@ -137,7 +194,7 @@ export function StudentsPage() {
 							{
 								students.length === 0 &&
 								<TableRow>
-									<TableCell colSpan={5}>Пусто</TableCell>
+									<TableCell colSpan={8}>Пусто</TableCell>
 								</TableRow>
 							}
 							{
@@ -159,6 +216,12 @@ export function StudentsPage() {
 											{getGroupName(student.studentGroupId)}
 										</TableCell>
 										<TableCell>
+											<Button
+												type='icon'
+												variant='add'
+												size='small'
+												title='Рассчитать стипендию'
+												onClick={() => openScholarshipModal(student.id, student.fullName)} />
 											<Button
 												type='icon'
 												variant='edit'
@@ -198,6 +261,71 @@ export function StudentsPage() {
 				onClose={(isConfirmed) => closeRemoveStudentConfirmModal(isConfirmed)}
 				isOpen={removeStudentConfirmModalState.isOpen}
 			/>
+
+			{/* Модалка расчёта стипендии */}
+			<Modal
+				isOpen={scholarshipModalState.isOpen}
+				onClose={closeScholarshipModal}
+			>
+				<Modal.Header onClose={closeScholarshipModal}>
+					Расчёт стипендии
+				</Modal.Header>
+				<Modal.Body
+					sx={{
+						maxWidth: '500px',
+						minWidth: '400px',
+						display: 'flex',
+						flexDirection: 'column',
+						gap: '16px',
+						padding: '24px'
+					}}
+				>
+					<Typography variant='h6'>
+						Студент: {scholarshipModalState.studentName}
+					</Typography>
+
+					{scholarshipModalState.isLoading && (
+						<Typography variant='body1' color='text.secondary'>
+							Рассчитываем стипендию...
+						</Typography>
+					)}
+
+					{!scholarshipModalState.isLoading && scholarshipModalState.scholarshipAmount === null && (
+						<Typography variant='body1' color='error'>
+							Не удалось рассчитать стипендию
+						</Typography>
+					)}
+
+					{scholarshipModalState.scholarshipAmount !== null && (
+						<Paper
+							elevation={2}
+							sx={{
+								padding: '16px',
+								backgroundColor: '#e3f2fd',
+								textAlign: 'center'
+							}}
+						>
+							<Typography variant='body2' color='text.secondary'>
+								Размер стипендии:
+							</Typography>
+							<Typography
+								variant='h4'
+								color='primary'
+								sx={{ fontWeight: 'bold', marginTop: '8px' }}
+							>
+								{scholarshipModalState.scholarshipAmount.toFixed(2)} ₽
+							</Typography>
+						</Paper>
+					)}
+				</Modal.Body>
+				<Modal.Footer>
+					<Button
+						variant='close'
+						title='Закрыть'
+						onClick={closeScholarshipModal}
+					/>
+				</Modal.Footer>
+			</Modal>
 
 			{
 				!String.isNullOrWhitespace(errorMessage) &&

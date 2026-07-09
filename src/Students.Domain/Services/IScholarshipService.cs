@@ -8,7 +8,6 @@ namespace Students.Domain.Services
 {
     public interface IScholarshipService
     {
-        Task<float> CalculateTotalScholarshipAsync();
-        
+        Task<float> CalculateStudentScholarshipAsync(Guid studentId);
     }
 }
