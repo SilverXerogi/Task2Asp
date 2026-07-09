@@ -23,6 +23,10 @@ export function StudentEditorModal(props: Props) {
 	const [studentGroups, setStudentGroups] = useState<StudentGroup[]>([]);
 	const [specialMarksString, setSpecialMarksString] = useState<string>('');
 
+
+	const ages = Array.from({length: 35-17+1}, (_, i) => i+17)
+	const grades = Array.from({ length: 21 }, (_, i) => parseFloat((3.0 + i * 0.1).toFixed(1)));
+
 	useEffect(() => {
 		if (!props.isOpen) return;
 		async function loadData() {
@@ -100,19 +104,23 @@ export function StudentEditorModal(props: Props) {
 						required
 					/>
 					<Input
-						variant='number'
+						variant='select'
 						title='Введите возраст'
+						options={ages}
+						getOptionLabel={(option) => option.toString()}
+						isOptionEqualToValue={(a, b) => a === b}
 						value={studentBlank.age}
 						onChange={(age) => setStudentBlank((studentBlank) => ({ ...studentBlank, age }))}
-						isAvailableFractionValue
 						required
 					/>
 					<Input
-						variant='number'
-						title='Введите среднюю оценку'
+						variant='select'
+						title='Введите среднюю оценку от 3.0 до 5.0'
+						options={grades}
+						getOptionLabel={(option) => option.toFixed(1)}
+						isOptionEqualToValue={(a, b) => a === b}
 						value={studentBlank.averageGrade}
 						onChange={(averageGrade) => setStudentBlank((studentBlank) => ({ ...studentBlank, averageGrade }))}
-						isAvailableFractionValue
 						required
 					/>
 					<Input

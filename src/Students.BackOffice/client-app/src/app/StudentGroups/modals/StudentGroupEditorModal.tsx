@@ -19,6 +19,9 @@ export function StudentGroupEditorModal(props: Props) {
 	const [studentGroupBlank, setStudentGroupBlank] = useState<StudentGroupBlank>(StudentGroupBlank.getEmpty());
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+	const currentYear = new Date().getFullYear();
+	const validYears = Array.from({length: 5}, (_, i) => currentYear - 4 + i);
+
 	useEffect(() => {
 		if (!props.isOpen) return;
 
@@ -81,19 +84,18 @@ export function StudentGroupEditorModal(props: Props) {
 						}
 					/>
 					<Input
-						variant='number'
+						variant='select'
 						title='Введите год начала обучения'
+						options={validYears}
+						getOptionLabel={(option) => option.toString()}
+						isOptionEqualToValue={(a, b) => a === b}
 						value={studentGroupBlank.startYear}
-						onChange={(startYear) => setStudentGroupBlank((studentGroupBlank) => ({ ...studentGroupBlank, startYear }))}
-						isAvailableFractionValue
-						required
-					/>
-					<Input
-						variant='number'
-						title='Введите год конца обучения'
-						value={studentGroupBlank.endYear}
-						onChange={(endYear) => setStudentGroupBlank((studentGroupBlank) => ({ ...studentGroupBlank, endYear }))}
-						isAvailableFractionValue
+						onChange={(startYear) => {
+							if (startYear !== null) {
+								setStudentGroupBlank((studentGroupBlank) => ({ ...studentGroupBlank, startYear, endYear: startYear + 4 }));
+							}
+
+						}}
 						required
 					/>
 					<Input
