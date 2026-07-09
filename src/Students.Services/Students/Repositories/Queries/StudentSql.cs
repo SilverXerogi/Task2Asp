@@ -49,7 +49,7 @@ internal static class StudentSql
                 COUNT(*) OVER() as count, 
                 *
             FROM students 
-            WHERE NOT isremoved 
+            WHERE isremoved = false 
             ORDER BY createddatetimeutc DESC 
             OFFSET @offset 
             LIMIT @limit
@@ -70,8 +70,8 @@ internal static class StudentSql
         """
         	UPDATE students
         	SET 
-                isremoved = TRUE,
+                isremoved = true,
         		modifieddatetimeutc = @modifiedDateTimeUtc
-        	WHERE id = @id
+        	WHERE id = @id AND  isremoved = false
         """;
 }

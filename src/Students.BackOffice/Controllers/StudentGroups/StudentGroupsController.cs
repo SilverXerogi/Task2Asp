@@ -24,14 +24,14 @@ public class StudentGroupsController(IStudentsGroupsService studentGroupsService
     }
 
     [HttpGet("studentGroups/get-by-id")]
-    public Task<StudentGroupA> GetStudentGroup([FromQuery] Guid id)
+    public Task<StudentGroupA> GetStudentGroup([FromQuery] Guid studentGroupId)
     {
-        return studentGroupsService.GetStudentGroup(id);
+        return studentGroupsService.GetStudentGroup(studentGroupId);
     }
 
     [HttpGet("studentGroups/remove")]
-    public Task<Result> RemoveStudentGroup([FromQuery] Guid id)
+    public Task<Result> RemoveStudentGroup([FromQuery] Guid studentGroupId)
     {
-        return studentGroupsService.RemoveStudentsGroup(id);
+        return studentGroupsService.RemoveStudentsGroup(studentGroupId);
     }
 }

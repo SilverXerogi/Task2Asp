@@ -8553,6 +8553,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_types_confirmModalState__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../shared/types/confirmModalState */ "./src/shared/types/confirmModalState.ts");
 /* harmony import */ var _tools_types_pagination__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../tools/types/pagination */ "./src/tools/types/pagination.ts");
 /* harmony import */ var _modals_StudentEditorModal__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modals/StudentEditorModal */ "./src/app/Students/modals/StudentEditorModal.tsx");
+/* harmony import */ var _domain_StudentGroups_StudentGroupsProvider__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../domain/StudentGroups/StudentGroupsProvider */ "./src/domain/StudentGroups/StudentGroupsProvider.ts");
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -8611,18 +8612,35 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 function StudentsPage() {
     var _a = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)([]), students = _a[0], setStudents = _a[1];
     var _b = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)(_tools_types_pagination__WEBPACK_IMPORTED_MODULE_17__.Pagination.default), pagination = _b[0], setPagination = _b[1];
-    var _c = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)({
+    var _c = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)([]), groups = _c[0], setGroups = _c[1];
+    var _d = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)({
         studentId: null,
         isOpen: false
-    }), studentEditorModalState = _c[0], setStudentEditorModalState = _c[1];
-    var _d = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)(__assign({ studentId: null }, _shared_types_confirmModalState__WEBPACK_IMPORTED_MODULE_16__.ConfirmModalState.getClosed())), removeStudentConfirmModalState = _d[0], setRemoveStudentConfirmModalState = _d[1];
-    var _e = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)(null), errorMessage = _e[0], setErrorMessage = _e[1];
+    }), studentEditorModalState = _d[0], setStudentEditorModalState = _d[1];
+    var _e = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)(__assign({ studentId: null }, _shared_types_confirmModalState__WEBPACK_IMPORTED_MODULE_16__.ConfirmModalState.getClosed())), removeStudentConfirmModalState = _e[0], setRemoveStudentConfirmModalState = _e[1];
+    var _f = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)(null), errorMessage = _f[0], setErrorMessage = _f[1];
     (0,react__WEBPACK_IMPORTED_MODULE_9__.useEffect)(function () {
         loadStudentsPage(__assign({}, pagination));
+        loadGroups();
     }, []);
+    function loadGroups() {
+        return __awaiter(this, void 0, void 0, function () {
+            var studentGroupsPage;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, _domain_StudentGroups_StudentGroupsProvider__WEBPACK_IMPORTED_MODULE_19__.StudentGroupsProvider.getStudentGroupsPage(1, 15)];
+                    case 1:
+                        studentGroupsPage = _a.sent();
+                        setGroups(studentGroupsPage.values);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    }
     function loadStudentsPage(newPagination) {
         return __awaiter(this, void 0, void 0, function () {
             var studentsPage;
@@ -8647,6 +8665,7 @@ function StudentsPage() {
         setStudentEditorModalState({ studentId: null, isOpen: false });
     }
     function openRemoveStudentConfirmModal(studentId, studentName) {
+        console.log("remove student id", { studentId: studentId });
         setRemoveStudentConfirmModalState(__assign({ studentId: studentId }, _shared_types_confirmModalState__WEBPACK_IMPORTED_MODULE_16__.ConfirmModalState.getOpen("\u0412\u044B \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u043E \u0445\u043E\u0442\u0438\u0442\u0435 \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u043F\u0440\u043E\u0434\u0443\u043A\u0442 \"".concat(studentName, "\""))));
     }
     function closeRemoveStudentConfirmModal(isConfirmed) {
@@ -8674,6 +8693,10 @@ function StudentsPage() {
             });
         });
     }
+    function getGroupName(groupId) {
+        var group = groups.find(function (g) { return g.id === groupId; });
+        return group ? "".concat(group.abbr, " - ").concat(group.name) : '-';
+    }
     return (react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_0__["default"], { sx: { height: '100%', display: 'flex', flexDirection: 'column', gap: '12px' }, maxWidth: false, disableGutters: true },
         react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["default"], { elevation: 3, sx: {
                 display: 'flex',
@@ -8695,6 +8718,7 @@ function StudentsPage() {
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], null, "\u0421\u0440\u0435\u0434\u043D\u044F\u044F \u043E\u0446\u0435\u043D\u043A\u0430"),
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], null, "\u0421\u0442\u0438\u043F\u0435\u043D\u0434\u0438\u044F"),
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], null, "\u041E\u0441\u043E\u0431\u044B\u0435 \u043E\u0442\u043C\u0435\u0442\u043A\u0438"),
+                            react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], null, "\u0413\u0440\u0443\u043F\u043F\u0430"),
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], null, "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435"))),
                     react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], null,
                         students.length === 0 &&
@@ -8707,6 +8731,7 @@ function StudentsPage() {
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: '10%' }, student.averageGrade.toFixed(2)),
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: '10%' }, student.hasScholarShip ? 'Да' : 'Нет'),
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: '22%' }, student.specialMarksText || '—'),
+                            react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: '22%' }, getGroupName(student.studentGroupId)),
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], null,
                                 react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_12__.Button, { type: 'icon', variant: 'edit', size: 'small', onClick: function () { return openStudentEditorModal(student.id); } }),
                                 react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_12__.Button, { type: 'icon', variant: 'remove', size: 'small', onClick: function () { return openRemoveStudentConfirmModal(student.id, student.fullName); } })))); })))),
@@ -8834,10 +8859,10 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 function StudentEditorModal(props) {
-    var _a;
-    var _b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_domain_Students_StudentBlank__WEBPACK_IMPORTED_MODULE_1__.StudentBlank.getEmpty()), studentBlank = _b[0], setStudentBlank = _b[1];
-    var _c = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null), errorMessage = _c[0], setErrorMessage = _c[1];
-    var _d = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]), studentGroups = _d[0], setStudentGroups = _d[1];
+    var _a = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_domain_Students_StudentBlank__WEBPACK_IMPORTED_MODULE_1__.StudentBlank.getEmpty()), studentBlank = _a[0], setStudentBlank = _a[1];
+    var _b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null), errorMessage = _b[0], setErrorMessage = _b[1];
+    var _c = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]), studentGroups = _c[0], setStudentGroups = _c[1];
+    var _d = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''), specialMarksString = _d[0], setSpecialMarksString = _d[1];
     (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
         if (!props.isOpen)
             return;
@@ -8858,8 +8883,12 @@ function StudentEditorModal(props) {
                             if (student == null)
                                 throw 'Student is null';
                             studentBlank = _domain_Students_StudentBlank__WEBPACK_IMPORTED_MODULE_1__.StudentBlank.getFromStudent(student);
-                            _a.label = 3;
+                            setSpecialMarksString(student.specialMarks.join(', '));
+                            return [3 /*break*/, 4];
                         case 3:
+                            setSpecialMarksString('');
+                            _a.label = 4;
+                        case 4:
                             setStudentBlank(studentBlank !== null && studentBlank !== void 0 ? studentBlank : _domain_Students_StudentBlank__WEBPACK_IMPORTED_MODULE_1__.StudentBlank.getEmpty());
                             return [2 /*return*/];
                     }
@@ -8871,14 +8900,18 @@ function StudentEditorModal(props) {
             setStudentBlank(_domain_Students_StudentBlank__WEBPACK_IMPORTED_MODULE_1__.StudentBlank.getEmpty());
             setStudentGroups([]);
             setErrorMessage(null);
+            setSpecialMarksString('');
         };
     }, [props.isOpen, props.studentId]);
     function saveStudent() {
         return __awaiter(this, void 0, void 0, function () {
-            var result;
+            var specialMarkArray, blankToSave, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, _domain_Students_StudentsProvider__WEBPACK_IMPORTED_MODULE_3__.StudentsProvider.saveStudent(studentBlank)];
+                    case 0:
+                        specialMarkArray = specialMarksString.split(',').map(function (mark) { return mark.trim(); }).filter(function (mark) { return mark.length > 0; });
+                        blankToSave = __assign(__assign({}, studentBlank), { specialMarks: specialMarkArray });
+                        return [4 /*yield*/, _domain_Students_StudentsProvider__WEBPACK_IMPORTED_MODULE_3__.StudentsProvider.saveStudent(blankToSave)];
                     case 1:
                         result = _a.sent();
                         if (!result.isSuccess) {
@@ -8889,24 +8922,6 @@ function StudentEditorModal(props) {
                         return [2 /*return*/];
                 }
             });
-        });
-    }
-    function addSpecialMark() {
-        setStudentBlank(function (studentBlank) {
-            var _a;
-            return (__assign(__assign({}, studentBlank), { specialMarks: (_a = studentBlank.specialMarks) !== null && _a !== void 0 ? _a : [] }));
-        });
-    }
-    function removeSpecialMark(index) {
-        setStudentBlank(function (studentBlank) {
-            var _a, _b;
-            return (__assign(__assign({}, studentBlank), { specialMarks: (_b = (_a = studentBlank.specialMarks) === null || _a === void 0 ? void 0 : _a.filter(function (_, i) { return i != index; })) !== null && _b !== void 0 ? _b : [] }));
-        });
-    }
-    function updateSpecialMark(index, value) {
-        setStudentBlank(function (studentBlank) {
-            var _a, _b;
-            return (__assign(__assign({}, studentBlank), { specialMarks: (_b = (_a = studentBlank.specialMarks) === null || _a === void 0 ? void 0 : _a.map(function (mark, i) { return i === index ? value : mark; })) !== null && _b !== void 0 ? _b : [] }));
         });
     }
     return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
@@ -8927,13 +8942,7 @@ function StudentEditorModal(props) {
                         var group = studentGroups.find(function (g) { return g.id === option; });
                         return group ? "".concat(group.abbr, " - ").concat(group.name) : '';
                     }, isOptionEqualToValue: function (a, b) { return a === b; }, value: studentBlank.studentGroupId, onChange: function (studentGroupId) { return setStudentBlank(function (studentBlank) { return (__assign(__assign({}, studentBlank), { studentGroupId: studentGroupId })); }); }, required: true }),
-                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { style: { display: 'flex', flexDirection: 'column', gap: '8px' } },
-                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", { style: { fontWeight: 'bold' } }, "\u041E\u0441\u043E\u0431\u044B\u0435 \u043E\u0442\u043C\u0435\u0442\u043A\u0438"),
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_4__.Button, { variant: 'add', title: 'add', size: 'small', onClick: addSpecialMark })), (_a = studentBlank.specialMarks) === null || _a === void 0 ? void 0 :
-                    _a.map(function (mark, index) { return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { key: "mark_".concat(index), style: { display: 'flex', gap: '8px' } },
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'text', title: "mark ".concat(index + 1), value: mark, onChange: function (value) { return updateSpecialMark(index, value !== null && value !== void 0 ? value : ''); } }),
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_4__.Button, { variant: 'remove', size: 'small', onClick: function () { return removeSpecialMark(index); } }))); }))),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_inputs_input__WEBPACK_IMPORTED_MODULE_5__.Input, { variant: 'text', title: 'special marks', placeholder: 'a, b, c, .....', value: specialMarksString, onChange: function (value) { return setSpecialMarksString(value !== null && value !== void 0 ? value : ''); } })),
             react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_6__.Modal.Footer, null,
                 react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_4__.Button, { variant: 'save', onClick: function () { return saveStudent(); } }))),
         !String.isNullOrWhitespace(errorMessage) &&
@@ -9564,15 +9573,20 @@ var StudentsProvider = /** @class */ (function () {
             var response, json;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch("/students/remove?studentId=".concat(id), {
-                            method: 'GET',
-                            headers: this.headers
-                        })];
+                    case 0:
+                        console.log('removeStudent вызван с id:', id);
+                        console.log('URL:', "/students/remove ? id = ".concat(id));
+                        return [4 /*yield*/, fetch("/students/remove?studentId=".concat(id), {
+                                method: 'POST',
+                                headers: this.headers
+                            })];
                     case 1:
                         response = _a.sent();
+                        console.log('Response status:', response.status);
                         return [4 /*yield*/, response.json()];
                     case 2:
                         json = _a.sent();
+                        console.log('Response json:', json);
                         return [2 /*return*/, (0,_tools_types_results_result__WEBPACK_IMPORTED_MODULE_0__.mapToResult)(json)];
                 }
             });

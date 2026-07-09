@@ -42,11 +42,16 @@ export class StudentsProvider {
 	}
 
 	public static async removeStudent(id: string): Promise<Result> {
+
+		console.log('removeStudent вызван с id:', id);
+		console.log('URL:', `/students/remove ? id = ${ id }`);
 		const response = await fetch(`/students/remove?studentId=${id}`, {
-			method: 'GET',
+			method: 'POST',
 			headers: this.headers
 		});
+		console.log('Response status:', response.status);
 		const json = await response.json();
+		console.log('Response json:', json);
 
 		return mapToResult(json);
 	}

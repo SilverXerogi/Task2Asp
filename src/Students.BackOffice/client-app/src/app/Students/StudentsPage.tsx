@@ -20,6 +20,8 @@ import { TablePagination } from '../../shared/components/tablePagination';
 import { ConfirmModalState } from '../../shared/types/confirmModalState';
 import { Pagination } from '../../tools/types/pagination';
 import { StudentEditorModal } from './modals/StudentEditorModal';
+import { StudentGroup } from '../../domain/StudentGroups/StudentGroup';
+import { StudentGroupsProvider } from '../../domain/StudentGroups/StudentGroupsProvider';
 
 type StudentEditorModalState = {
 	studentId: string | null;
@@ -33,7 +35,7 @@ interface RemoveStudentConfirmModalState extends ConfirmModalState {
 export function StudentsPage() {
 	const [students, setStudents] = useState<Student[]>([]);
 	const [pagination, setPagination] = useState<Pagination>(Pagination.default);
-
+	const [groups, setGroups] = useState<StudentGroup[]>([]);
 	const [studentEditorModalState, setStudentEditorModalState] = useState<StudentEditorModalState>({
 		studentId: null,
 		isOpen: false
@@ -45,8 +47,12 @@ export function StudentsPage() {
 
 	useEffect(() => {
 		loadStudentsPage({ ...pagination });
+		loadGroups();
 	}, []);
-
+	async function loadGroups() {
+		const studentGroupsPage = await StudentGroupsProvider.getStudentGroupsPage(1, 15);
+		setGroups(studentGroupsPage.values); 
+	}
 	async function loadStudentsPage(newPagination: Pagination) {
 		const studentsPage = await StudentsProvider.getStudentsPage(newPagination.page, newPagination.pageSize);
 
@@ -69,6 +75,7 @@ export function StudentsPage() {
 	}
 
 	function openRemoveStudentConfirmModal(studentId: string, studentName: string) {
+		console.log("remove student id", { studentId })
 		setRemoveStudentConfirmModalState({
 			studentId,
 			...ConfirmModalState.getOpen(`Вы действительно хотите удалить продукт "${studentName}"`)
@@ -90,7 +97,10 @@ export function StudentsPage() {
 
 		setRemoveStudentConfirmModalState({ studentId: null, ...ConfirmModalState.getClosed() });
 	}
-
+	function getGroupName(groupId: string): string {
+		const group = groups.find(g => g.id === groupId);
+		return group ? `${group.abbr} - ${group.name}` : '-';
+	}
 	return (
 		<Container
 			sx={{ height: '100%', display: 'flex', flexDirection: 'column', gap: '12px' }}
@@ -119,6 +129,7 @@ export function StudentsPage() {
 								<TableCell>Средняя оценка</TableCell>
 								<TableCell>Стипендия</TableCell>
 								<TableCell>Особые отметки</TableCell>
+								<TableCell>Группа</TableCell>
 								<TableCell>Управление</TableCell>
 							</TableRow>
 						</TableHead>
@@ -143,6 +154,9 @@ export function StudentsPage() {
 										</TableCell>
 										<TableCell width='22%'>
 											{student.specialMarksText || '—'}
+										</TableCell>
+										<TableCell width='22%'>
+											{getGroupName(student.studentGroupId)}
 										</TableCell>
 										<TableCell>
 											<Button

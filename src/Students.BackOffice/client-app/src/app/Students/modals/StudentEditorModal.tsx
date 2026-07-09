@@ -21,6 +21,7 @@ export function StudentEditorModal(props: Props) {
 	const [studentBlank, setStudentBlank] = useState<StudentBlank>(StudentBlank.getEmpty());
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const [studentGroups, setStudentGroups] = useState<StudentGroup[]>([]);
+	const [specialMarksString, setSpecialMarksString] = useState<string>('');
 
 	useEffect(() => {
 		if (!props.isOpen) return;
@@ -35,7 +36,8 @@ export function StudentEditorModal(props: Props) {
 				if (student == null) throw 'Student is null';
 
 				studentBlank = StudentBlank.getFromStudent(student);
-			}
+				setSpecialMarksString(student.specialMarks.join(', '));
+			} else { setSpecialMarksString('') }
 
 			setStudentBlank(studentBlank ?? StudentBlank.getEmpty());
 		}
@@ -46,11 +48,19 @@ export function StudentEditorModal(props: Props) {
 			setStudentBlank(StudentBlank.getEmpty());
 			setStudentGroups([]);
 			setErrorMessage(null);
+			setSpecialMarksString('');
 		};
 	}, [props.isOpen, props.studentId]);
 
 	async function saveStudent() {
-		const result = await StudentsProvider.saveStudent(studentBlank);
+
+		const specialMarkArray = specialMarksString.split(',').map(mark => mark.trim()).filter(mark => mark.length > 0);
+
+		const blankToSave = { ...studentBlank, specialMarks: specialMarkArray };
+
+
+
+		const result = await StudentsProvider.saveStudent(blankToSave);
 		if (!result.isSuccess) {
 			setErrorMessage(result.errorsAsString);
 			return;
@@ -59,24 +69,6 @@ export function StudentEditorModal(props: Props) {
 		props.onClose(true);
 	}
 
-	function addSpecialMark() {
-		setStudentBlank((studentBlank) => ({
-			...studentBlank,
-			specialMarks: studentBlank.specialMarks ?? []
-		}));
-	} 
-	function removeSpecialMark(index: number) {
-		setStudentBlank((studentBlank) => ({
-			...studentBlank,
-			specialMarks: studentBlank.specialMarks?.filter((_, i) => i != index) ?? []
-		}));
-	} 
-	function updateSpecialMark(index: number, value: string) {
-		setStudentBlank((studentBlank) => ({
-			...studentBlank,
-			specialMarks: studentBlank.specialMarks?.map((mark, i) => i === index ? value: mark) ?? []
-		}));
-	} 
 	
 	return (
 		<>
@@ -136,27 +128,13 @@ export function StudentEditorModal(props: Props) {
 						onChange={(studentGroupId) => setStudentBlank((studentBlank) => ({ ...studentBlank, studentGroupId }))}
 						required
 					/>
-					<div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-						<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-							<span style={{fontWeight: 'bold'} }>Особые отметки</span>
-							<Button variant='add' title='add' size='small' onClick={addSpecialMark} />
-						</div>
-						{studentBlank.specialMarks?.map((mark, index) => (
-							<div key={`mark_${index}`} style={{ display: 'flex', gap: '8px' }}>
-								<Input
-									variant='text'
-									title={`mark ${index+1}`}
-									value={mark}
-									onChange={(value)=>updateSpecialMark(index, value ?? '') }
-								/>
-								<Button
-									variant='remove'
-									size='small'
-									onClick={()=> removeSpecialMark(index) }
-								/>
-							</div>
-						))}
-					</div>
+					<Input
+						variant='text'
+						title='special marks'
+						placeholder='a, b, c, .....'
+						value={specialMarksString}
+						onChange={(value) => setSpecialMarksString(value ?? '')}
+						/>
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant='save' onClick={() => saveStudent()} />

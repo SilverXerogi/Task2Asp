@@ -85,6 +85,7 @@ public class StudentsRepository : IStudentsRepository
 
     public Task RemoveStudent(Guid id)
     {
+        Console.WriteLine($"=== repo: Received id = {id} ===");
         return DatabaseUtils.ExecuteAsync(
             Queries.StudentSql.Students_Remove,
             parameters =>

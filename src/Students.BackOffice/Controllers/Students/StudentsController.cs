@@ -31,14 +31,21 @@ public class StudentsController(IStudentsService studentsService) : BaseControll
     }
 
     [HttpGet("students/get-by-id")]
-    public Task<Student> GetStudent([FromQuery] Guid id)
+    public Task<Student> GetStudent([FromQuery] Guid studentId)
     {
-        return studentsService.GetStudent(id);
+        return studentsService.GetStudent(studentId);
     }
 
-    [HttpGet("students/remove")]
-    public Task<Result> RemoveStudent([FromQuery] Guid id)
+    [HttpPost("students/remove")]
+    public async Task<Result> Remove([FromQuery] Guid studentId)
     {
-        return studentsService.RemoveStudent(id);
+        Console.WriteLine($"=== CONTROLLER: Received id = {studentId} ===");
+        Console.WriteLine($"=== CONTROLLER: id.ToString() = {studentId.ToString()} ===");
+
+        var result = await studentsService.RemoveStudent(studentId);
+
+        Console.WriteLine($"=== CONTROLLER: Result = {result.IsSuccess} ===");
+
+        return result;
     }
 }

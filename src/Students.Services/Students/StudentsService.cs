@@ -144,6 +144,7 @@ public class StudentsService(IStudentsRepository studentsRepository) : IStudents
 
     public async Task<Result> RemoveStudent(Guid id)
     {
+        Console.WriteLine($"service remove student id = {id}");
         await studentsRepository.RemoveStudent(id);
 
         return Result.Success();
