@@ -60,4 +60,13 @@ internal static class StudentGroupsSql
         		modifieddatetimeutc = @modifiedDateTimeUtc
         	WHERE id = @id
         """;
+    internal static String GetAll =>
+    """
+        SELECT id, name, abbreviation, startyear, endyear, studyformat,
+               createddatetimeutc, modifieddatetimeutc, isremoved,
+               COUNT(*) OVER() as count
+        FROM student_groups
+        WHERE isremoved = false
+        LIMIT @count OFFSET (@page - 1) * @count
+    """;
 }

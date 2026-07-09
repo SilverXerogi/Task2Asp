@@ -3,6 +3,8 @@ using Students.Domain.StudentGroup;
 using Students.Services.StudentGroups.Repositories.Converters;
 using Students.Services.StudentGroups.Repositories.Models;
 using Students.Services.StudentGroups.Repositories.Queries;
+using Students.Services.Students.Repositories.Converters;
+using Students.Services.Students.Repositories.Models;
 using Students.Tools.Types;
 using Students.Tools.Utils;
 using static Students.Tools.Utils.NumberUtils;
@@ -73,5 +75,18 @@ public class StudentGroupsRepository : IStudentGroupsRepository
                 parameters.AddWithValue("@modifiedDateTimeUtc", DateTime.UtcNow);
             }
         );
+    }
+    public async Task<List<StudentGroupDb>> GetAllGroupsAsync()
+    {
+        var page = await DatabaseUtils.GetPageAsync(
+            Queries.StudentGroupsSql.GetAll,
+            parameters =>
+            {
+                parameters.AddWithValue("@offset", 1);
+                parameters.AddWithValue("@limit", 1000);
+            },
+            reader => StudentGroupsConverter.ToStudentGroupDb(reader)
+            );
+        return page.Values.ToList();
     }
 }

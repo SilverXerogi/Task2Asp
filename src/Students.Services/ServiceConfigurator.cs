@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Students.Services.StudentGroups;
 using Students.Services.StudentGroups.Repositories;
 using Goods.Services.Products.Repositories;
+using Students.Services.Scholarship;
 namespace Students.Services;
 
 public static class ServiceConfigurator
@@ -16,6 +17,8 @@ public static class ServiceConfigurator
 
         collection.AddSingleton<IStudentsGroupsService, StudentGroupsService>();
         collection.AddSingleton<IStudentGroupsRepository, StudentGroupsRepository>();
+
+        collection.AddSingleton<IScholarService, ScholarshipService>();
 
         return collection;
     }

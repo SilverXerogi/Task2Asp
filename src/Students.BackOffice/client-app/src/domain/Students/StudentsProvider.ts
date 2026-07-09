@@ -55,4 +55,13 @@ export class StudentsProvider {
 
 		return mapToResult(json);
 	}
+	public static async calculateScholarship(): Promise<number> {
+		const response = await fetch(`/calculateScholarship`, {
+			method: 'GET',
+			headers: this.headers
+		});
+		const json = await response.json();
+
+		return json;
+	}
 }

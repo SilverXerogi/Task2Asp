@@ -9599,6 +9599,25 @@ var StudentsProvider = /** @class */ (function () {
             });
         });
     };
+    StudentsProvider.calculateScholarship = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, json;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch("/calculateScholarship", {
+                            method: 'GET',
+                            headers: this.headers
+                        })];
+                    case 1:
+                        response = _a.sent();
+                        return [4 /*yield*/, response.json()];
+                    case 2:
+                        json = _a.sent();
+                        return [2 /*return*/, json];
+                }
+            });
+        });
+    };
     StudentsProvider.headers = [
         ['X-Requested-With', 'XMLHttpRequest'],
         ['Content-Type', 'application/json']

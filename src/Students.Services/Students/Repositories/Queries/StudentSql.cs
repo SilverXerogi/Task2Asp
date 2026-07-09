@@ -74,4 +74,13 @@ internal static class StudentSql
         		modifieddatetimeutc = @modifiedDateTimeUtc
         	WHERE id = @id AND  isremoved = false
         """;
+    internal static String Students_GetAll =>
+    """
+        SELECT id, fullname, gender, age, averagegrade, specialmarks, studentgroupid,
+               createddatetimeutc, modifieddatetimeutc, isremoved,
+               COUNT(*) OVER() as count
+        FROM students
+        WHERE isremoved = false
+        LIMIT @count OFFSET (@page - 1) * @count
+    """;
 }

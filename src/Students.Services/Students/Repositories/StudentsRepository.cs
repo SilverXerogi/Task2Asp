@@ -95,5 +95,18 @@ public class StudentsRepository : IStudentsRepository
             }
         );
     }
+    public async Task<List<StudentDb>> GetAllStudentsAsync()
+    {
+        var page = await DatabaseUtils.GetPageAsync(
+            Queries.StudentSql.Students_GetAll,
+            parameters =>
+            {
+                parameters.AddWithValue("@offset", 1);
+                parameters.AddWithValue("@limit", 1000);
+            },
+            reader => StudentsConverter.ToStudentDb(reader)
+            );
+        return page.Values.ToList();
+    }
 
 }
