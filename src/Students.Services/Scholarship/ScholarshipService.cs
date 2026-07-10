@@ -27,8 +27,18 @@ public class ScholarshipService(
 
         float scholarship = student.AverageGrade
                               * 500
-                              * (float)Math.Sqrt((double)course);
-
+                              * (float)Math.Sqrt((double)course) * (float)Math.Sqrt(student.Age);
+        
         return scholarship;
     }
+
+    public async Task<float> CalculateAllScholarship(Guid studentGroupId)
+    {
+        var group = await studentGroupsRepository.GetStudentGroup(studentGroupId);
+
+        var students = studentsRepository.GetStudentsByGroupId(studentGroupId);
+
+    }
+
+
 }
