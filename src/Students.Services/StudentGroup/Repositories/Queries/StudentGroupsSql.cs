@@ -5,32 +5,20 @@ internal static class StudentGroupsSql
     internal static String Save =>
         """
             INSERT INTO student_groups (
-                id,
-                name,
-                abbreviation,
-                startyear,
-                endyear,
-                studyformat,
-                createddatetimeutc,
-                isremoved
-            )
-            VALUES (
-                @id,
-                @name,
-                @abbreviation,
-                @startYear,
-                @endYear,
-                @studyFormat,
-                @createdDateTimeUtc,
-                @isRemoved
-            )
-        	ON CONFLICT (id) DO UPDATE SET
-        	    name = @name,
-        	    abbreviation = @abbreviation,
-        	    startyear = @startYear,
-        	    endyear = @endYear,
-        	    studyformat = @studyFormat,
-        	    modifieddatetimeutc = @modifiedDateTimeUtc
+            id, name, abbreviation, startdatetime, enddatetime, studyformat,
+            createddatetimeutc, modifieddatetimeutc, isremoved
+        )
+        VALUES (
+            @id, @name, @abbreviation, @startDateTime, @endDateTime, @studyFormat,
+            @createdDateTimeUtc, @modifiedDateTimeUtc, @isRemoved
+        )
+        ON CONFLICT (id) DO UPDATE SET
+            name = @name,
+            abbreviation = @abbreviation,
+            startdatetime = @startDateTime,
+            enddatetime = @endDateTime,
+            studyformat = @studyFormat,
+            modifieddatetimeutc = @modifiedDateTimeUtc
         """;
 
     internal static String GetById =>
@@ -62,11 +50,11 @@ internal static class StudentGroupsSql
         """;
     internal static String GetAll =>
     """
-        SELECT id, name, abbreviation, startyear, endyear, studyformat,
-               createddatetimeutc, modifieddatetimeutc, isremoved,
-               COUNT(*) OVER() as count
-        FROM student_groups
-        WHERE isremoved = false
-        LIMIT @count OFFSET (@page - 1) * @count
+        SELECT id, name, abbreviation, startdatetime, enddatetime, studyformat,
+           createddatetimeutc, modifieddatetimeutc, isremoved,
+           COUNT(*) OVER() as count
+    FROM student_groups
+    WHERE isremoved = false
+    LIMIT @count OFFSET (@page - 1) * @count
     """;
 }

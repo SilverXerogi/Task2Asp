@@ -7,7 +7,7 @@ public class StudentDb
     public Guid Id { get; set; }
     public String FullName { get; set; }
     public Gender Gender { get; set; }
-    public Int32 Age { get; set; }
+    public DateTime BirthDate { get; set; }
     public Single AverageGrade { get; set; }
     public String SpecialMarksJson { get; set; }
     public Guid StudentGroupId { get; set; }
@@ -19,7 +19,7 @@ public class StudentDb
         Guid id,
         String fullName,
         Gender gender,
-        Int32 age,
+        DateTime birthDate,
         Single averageGrade,
         String specialMarksJson,
         Guid studentGroupId,
@@ -31,7 +31,7 @@ public class StudentDb
         Id = id;
         FullName = fullName;
         Gender = gender;
-        Age = age;
+        BirthDate = birthDate;
         AverageGrade = averageGrade;
         SpecialMarksJson = specialMarksJson;
         StudentGroupId = studentGroupId;

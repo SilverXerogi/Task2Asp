@@ -22,7 +22,7 @@ public class StudentsRepository : IStudentsRepository
                 parameters.AddWithValue("@id", studentDb.Id);
                 parameters.AddWithValue("@fullName", studentDb.FullName);
                 parameters.AddWithValue("@gender", (Int32)studentDb.Gender);
-                parameters.AddWithValue("@age", studentDb.Age);
+                parameters.AddWithValue("@birthDate", student.BirthDate);
                 parameters.AddWithValue("@averageGrade", studentDb.AverageGrade);
                 parameters.AddWithValue("@specialMarks", studentDb.SpecialMarksJson);
                 parameters.AddWithValue("@studentGroupId", studentDb.StudentGroupId);

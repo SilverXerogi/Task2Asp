@@ -17,7 +17,7 @@ internal static class StudentsConverter
             studentDb.Id,
             studentDb.FullName,
             studentDb.Gender,
-            studentDb.Age,
+            studentDb.BirthDate,
             studentDb.AverageGrade,
             specialMarks,
             studentDb.StudentGroupId
@@ -30,7 +30,7 @@ internal static class StudentsConverter
             reader.GetGuid(reader.GetOrdinal("id")),
             reader.GetString(reader.GetOrdinal("fullname")),
             (Gender)reader.GetInt32(reader.GetOrdinal("gender")),
-            reader.GetInt32(reader.GetOrdinal("age")),
+            reader.GetDateTime(reader.GetOrdinal("birthdate")),
             reader.GetFloat(reader.GetOrdinal("averagegrade")),
             reader.IsDBNull(reader.GetOrdinal("specialmarks"))
                 ? "[]"
@@ -52,7 +52,7 @@ internal static class StudentsConverter
             student.Id,
             student.FullName,
             student.Gender,
-            student.Age,
+            student.BirthDate,
             student.AverageGrade,
             specialMarksJson,
             student.StudentGroupId,

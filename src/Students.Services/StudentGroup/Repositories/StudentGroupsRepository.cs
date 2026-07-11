@@ -24,8 +24,8 @@ public class StudentGroupsRepository : IStudentGroupsRepository
                 parameters.AddWithValue("@id", groupDb.Id);
                 parameters.AddWithValue("@name", groupDb.Name);
                 parameters.AddWithValue("@abbreviation", groupDb.Abbreviation);
-                parameters.AddWithValue("@startYear", groupDb.StartYear);
-                parameters.AddWithValue("@endYear", groupDb.EndYear);
+                parameters.AddWithValue("@startDateTime", group.StartDateTime); 
+                parameters.AddWithValue("@endDateTime", group.EndDateTime);
                 parameters.AddWithValue("@studyFormat", (Int32)groupDb.StudyFormat);
                 parameters.AddWithValue("@createdDateTimeUtc", groupDb.CreatedDateTimeUtc);
                 parameters.AddWithValue("@modifiedDateTimeUtc", (Object?)groupDb.ModifiedDateTimeUtc ?? DBNull.Value);

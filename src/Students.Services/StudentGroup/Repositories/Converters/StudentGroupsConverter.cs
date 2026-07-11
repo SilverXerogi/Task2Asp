@@ -14,8 +14,8 @@ internal static class StudentGroupsConverter
             groupDb.Id,
             groupDb.Name,
             groupDb.Abbreviation,
-            groupDb.StartYear,
-            groupDb.EndYear,
+            groupDb.StartDateTime,
+            groupDb.EndDateTime,
             groupDb.StudyFormat
         );
     }
@@ -26,8 +26,8 @@ internal static class StudentGroupsConverter
             reader.GetGuid(reader.GetOrdinal("id")),
             reader.GetString(reader.GetOrdinal("name")),
             reader.GetString(reader.GetOrdinal("abbreviation")),
-            reader.GetInt32(reader.GetOrdinal("startyear")),
-            reader.GetInt32(reader.GetOrdinal("endyear")),
+            reader.GetDateTime(reader.GetOrdinal("startdatetime")),
+            reader.GetDateTime(reader.GetOrdinal("enddatetime")),
             (StudyFormat)reader.GetInt32(reader.GetOrdinal("studyformat")),
             reader.GetDateTime(reader.GetOrdinal("createddatetimeutc")),
             reader.IsDBNull(reader.GetOrdinal("modifieddatetimeutc"))
@@ -43,8 +43,8 @@ internal static class StudentGroupsConverter
             group.Id,
             group.Name,
             group.Abbr,
-            group.StartYear,
-            group.EndYear,
+            group.StartDateTime,
+            group.EndDateTime,
             group.StudyFormat,
             createdDateTimeUtc: DateTime.UtcNow,
             modifiedDateTimeUtc: DateTime.UtcNow,

@@ -5,35 +5,21 @@ internal static class StudentSql
     internal static String Students_Save =>
         """
             INSERT INTO students (
-                id,
-                fullname,
-                gender,
-                age,
-                averagegrade,
-                specialmarks,
-                studentgroupid,
-                createddatetimeutc,
-                isremoved
-            )
-            VALUES (
-                @id,
-                @fullname,
-                @gender,
-                @age,
-                @averagegrade,
-                @specialmarks,
-                @studentgroupid,
-                @createddatetimeutc,
-                @isRemoved
-            )
-        	ON CONFLICT (id) DO UPDATE SET
-        	    fullname = @fullName,
-               	gender = @gender,
-               	age = @age,
-               	averagegrade = @averageGrade,
-               	specialmarks = @specialMarks,
-               	studentgroupid = @studentGroupId,
-               	modifieddatetimeutc = @modifiedDateTimeUtc
+            id, fullname, gender, birthdate, averagegrade, specialmarks, studentgroupid,
+            createddatetimeutc, modifieddatetimeutc, isremoved
+        )
+        VALUES (
+            @id, @fullName, @gender, @birthDate, @averageGrade, @specialMarks, @studentGroupId,
+            @createdDateTimeUtc, @modifiedDateTimeUtc, @isRemoved
+        )
+        ON CONFLICT (id) DO UPDATE SET
+            fullname = @fullName,
+            gender = @gender,
+            birthdate = @birthDate,
+            averagegrade = @averageGrade,
+            specialmarks = @specialMarks,
+            studentgroupid = @studentGroupId,
+            modifieddatetimeutc = @modifiedDateTimeUtc
         """;
 
     internal static String Students_GetById =>
@@ -76,11 +62,11 @@ internal static class StudentSql
         """;
     internal static String Students_GetAll =>
     """
-        SELECT id, fullname, gender, age, averagegrade, specialmarks, studentgroupid,
-               createddatetimeutc, modifieddatetimeutc, isremoved,
-               COUNT(*) OVER() as count
-        FROM students
-        WHERE isremoved = false
-        LIMIT @count OFFSET (@page - 1) * @count
+        SELECT id, fullname, gender, birthdate, averagegrade, specialmarks, studentgroupid,
+           createddatetimeutc, modifieddatetimeutc, isremoved,
+           COUNT(*) OVER() as count
+    FROM students
+    WHERE isremoved = false
+    LIMIT @count OFFSET (@page - 1) * @count
     """;
 }

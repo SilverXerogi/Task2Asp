@@ -7,23 +7,36 @@ public class StudentGroupA
     public Guid Id { get; }
     public String Name { get; }
     public String? Abbr { get; }
-    public DateOnly StartDay { get; set; }
-    public DateOnly EndDay { get; set; }
+    public DateTime StartDateTime { get; }
+    public DateTime EndDateTime { get; }
     public StudyFormat StudyFormat { get; set; }
 
-    public StudentGroupA(Guid id, String name, String abbr, Int32 startYear, Int32 endYear, StudyFormat studyFormat) 
+    public StudentGroupA(Guid id, String name, String abbr, DateTime startDateTime, DateTime endDateTime, StudyFormat studyFormat) 
     {
         Id = id;
         Name = name;
         Abbr = abbr;
-        StartYear = startYear;
-        EndYear = endYear;
+        StartDateTime = startDateTime;
+        EndDateTime = endDateTime;
         StudyFormat = studyFormat;
     }
-    public Int32 getCourse(DateOnly day)
+    public Int32 GetTotalCourses()
     {
-        int currentDay = day;
+        return EndDateTime.Year - StartDateTime.Year;
+    }
+    public Int32 GetCourse(DateTime currentDate)
+    {
+        if (currentDate < StartDateTime)
+            return 0;
 
-        int course = currentDay - this.StartDay + 1;
+        if (currentDate > EndDateTime)
+            return GetTotalCourses();
+
+        Int32 course = currentDate.Year - StartDateTime.Year + 1;
+
+        if (currentDate < StartDateTime.AddYears(course - 1))
+            course--;
+
+        return course;
     }
 }

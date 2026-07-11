@@ -9,5 +9,6 @@ namespace Students.Domain.Services
     public interface IScholarshipService
     {
         Task<float> CalculateStudentScholarshipAsync(Guid studentId);
+        Task<float> CalculateTotalScholarshipForGroupPeriodAsync(Guid groupId);
     }
 }
